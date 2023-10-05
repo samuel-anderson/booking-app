@@ -16,12 +16,12 @@ touch routes/professionals/professionals.component.jsx routes/services/services.
 mkdir components components/header components/main components/footer
 mkdir components/main/content components/main/cart 
 
+touch components/main/main.component.jsx components/main/main.styles.jsx
 touch components/header/header.component.jsx components/header/header.styles.jsx
 touch components/footer/footer.component.jsx components/footer/footer.styles.jsx
 
-mkdir components/main/content/professional-list
-touch components/main/content/professional-list/professional-list.component.jsx
-touch components/main/content/professional-list/professional-list.styles.jsx
+touch components/main/content/content.component.jsx components/main/content/content.styles.jsx
+touch components/main/cart/cart.component.jsx components/main/cart/cart.styles.jsx
 
 mkdir components/main/content/professional-card
 touch components/main/content/professional-card/professional-card.component.jsx
