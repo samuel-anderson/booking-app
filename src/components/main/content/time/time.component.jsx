@@ -1,18 +1,18 @@
 import useNavigation from "../../../../hooks/useNavigation";
 import { getStep, STEPS } from "../stepper/stepper.component";
 
-const ProfessionalList = () => {
+const Time = () => {
   const { navigateAndUpdateStep } = useNavigation();
 
   const handleClick = () => {
-    const { route, step } = getStep(STEPS.service);
+    const { route, step } = getStep(STEPS.done);
     navigateAndUpdateStep(route, step);
   };
   return (
     <div>
-      Choose a professional - <span onClick={handleClick}>Go Service</span>
+      Choose a Time <span onClick={handleClick}>Go to Done</span>
     </div>
   );
 };
 
-export default ProfessionalList;
+export default Time;

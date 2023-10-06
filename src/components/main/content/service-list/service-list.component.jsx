@@ -1,21 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import { setStep } from "../../../../features/step/stepSlice";
-
-import { useDispatch, useSelector } from "react-redux";
+import useNavigation from "../../../../hooks/useNavigation";
+import { getStep, STEPS } from "../stepper/stepper.component";
 
 const ServiceList = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const activeStep = useSelector((state) => state.step.activeStep);
+  const { navigateAndUpdateStep } = useNavigation();
 
   const handleClick = () => {
-    dispatch(setStep(activeStep - 1));
-    navigate("/");
+    const { route, step } = getStep(STEPS.time);
+    navigateAndUpdateStep(route, step);
   };
   return (
     <div>
-      Choose a service <span onClick={handleClick}>Click Me</span>
+      Choose a service <span onClick={handleClick}>Go to Time</span>
     </div>
   );
 };
