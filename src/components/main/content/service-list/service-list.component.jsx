@@ -1,21 +1,70 @@
-import useNavigation from "../../../../hooks/useNavigation";
-import { getStep, STEPS } from "../stepper/stepper.component";
-import { useSelector } from "react-redux";
+import { ServicesContainer } from "./service-list.styles";
+import ServiceCard from "../service-card/service-card.component";
+
+const services = [
+  {
+    id: 1,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 2,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 3,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 4,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 5,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 6,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 7,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+  {
+    id: 8,
+    title: "Shave",
+    duration: 45,
+    price: 40,
+  },
+];
 
 const ServiceList = () => {
-  const { navigateAndUpdateStep } = useNavigation();
-  const { id, name } = useSelector((state) => state.cart.professional);
-
-  const handleClick = () => {
-    const { route, step } = getStep(STEPS.time);
-    navigateAndUpdateStep(route, step);
-  };
   return (
     <div>
-      Choose a service <span onClick={handleClick}>Go to Time</span>
-      <div>
-        {name} - {id}
-      </div>
+      Choose a service
+      <ServicesContainer>
+        {services.map((service) => {
+          return (
+            <div key={service.id}>
+              <ServiceCard service={service} />
+            </div>
+          );
+        })}
+      </ServicesContainer>
     </div>
   );
 };
