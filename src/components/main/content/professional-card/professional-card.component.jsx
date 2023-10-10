@@ -6,9 +6,13 @@ import { setProfessional } from "../../../../features/cart/cartSlice";
 import { ProfessionalCardStyles } from "./professional-card.styles";
 
 const ProfessionalCard = ({ professional }) => {
-  const { id, imageUrl, name, nextAvailableTime } = professional;
+  const {
+    data: { id, name },
+  } = professional;
   const { navigateAndUpdateStep } = useNavigation();
   const dispatch = useDispatch();
+
+  console.log(professional);
 
   const clickHandler = () => {
     dispatch(setProfessional({ id, name }));
@@ -21,9 +25,9 @@ const ProfessionalCard = ({ professional }) => {
   };
   return (
     <ProfessionalCardStyles onClick={clickHandler}>
-      <img src={imageUrl} alt={`${name}`} />
+      <img src="/images/ryan_johnson.jpg" alt={`${name}`} />
       <span>{name}</span>
-      <span>{nextAvailableTime}</span>
+      {/* <span>nextAvailableTime</span> */}
     </ProfessionalCardStyles>
   );
 };
