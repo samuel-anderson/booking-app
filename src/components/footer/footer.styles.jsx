@@ -8,6 +8,7 @@ export const FooterStyle = styled.footer`
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  background-color: rgb(247, 247, 247);
 
   align-items: center;
 
