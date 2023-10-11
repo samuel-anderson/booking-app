@@ -12,8 +12,6 @@ const ProfessionalCard = ({ professional }) => {
   const { navigateAndUpdateStep } = useNavigation();
   const dispatch = useDispatch();
 
-  console.log(professional);
-
   const clickHandler = () => {
     dispatch(setProfessional({ id, name }));
     navigate();

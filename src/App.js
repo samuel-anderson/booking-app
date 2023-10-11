@@ -5,6 +5,8 @@ import { fetchServicesStart } from "./features/services/servicesSlice";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+// import { firebaseApi } from "./api/index";
+// import { services } from "./data/service";
 
 function App() {
   const dispatch = useDispatch();
@@ -12,6 +14,12 @@ function App() {
   useEffect(() => {
     dispatch(fetchProfessionalsStart());
     dispatch(fetchServicesStart());
+
+    // const create = async () => {
+    //   await firebaseApi.createDocument("services", services);
+    // };
+
+    // create();
   }, [dispatch]);
   return (
     <>
