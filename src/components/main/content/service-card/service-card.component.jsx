@@ -3,12 +3,13 @@ import { addService } from "../../../../features/cart/cartSlice";
 
 import { ServiceCardStyles } from "./service-card.styles";
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, onClickHandler }) => {
   const { title, duration, price } = service;
   const dispatch = useDispatch();
 
   const clickHandler = () => {
     dispatch(addService({ service }));
+    onClickHandler(service);
   };
 
   return (
