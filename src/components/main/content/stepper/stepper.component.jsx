@@ -16,7 +16,7 @@ export const STEPS = {
 export const getStep = (step = STEPS.professional) => {
   return {
     [STEPS.professional]: { step: 0, route: "/" },
-    [STEPS.service]: { step: 1, route: "/service" },
+    [STEPS.service]: { step: 1, route: "/services" },
     [STEPS.time]: { step: 2, route: "/time" },
     [STEPS.done]: { step: 3, route: "/done" },
   }[step];

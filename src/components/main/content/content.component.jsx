@@ -13,7 +13,7 @@ const Content = () => {
       <Steps />
       <Routes>
         <Route path="/" element={<ProfessionalList />} />
-        <Route path="/service" element={<ServiceList />} />
+        <Route path="/services" element={<ServiceList />} />
         <Route path="/time" element={<Time />} />
         <Route path="/done" element={<Completed />} />
       </Routes>
