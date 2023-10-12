@@ -7,13 +7,13 @@ import { ProfessionalCardStyles } from "./professional-card.styles";
 
 const ProfessionalCard = ({ professional }) => {
   const {
-    data: { id, name },
+    data: { name },
   } = professional;
   const { navigateAndUpdateStep } = useNavigation();
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(setProfessional({ id, name }));
+    dispatch(setProfessional({ professional }));
     navigate();
   };
 

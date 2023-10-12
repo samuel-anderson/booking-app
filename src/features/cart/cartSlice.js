@@ -3,17 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    professional: {
-      id: null,
-      name: "",
-    },
+    professional: null,
     service: null,
     addOns: [],
   },
   reducers: {
     setProfessional: (state, action) => {
-      state.professional.id = action.payload.id;
-      state.professional.name = action.payload.name;
+      state.professional = action.payload.professional;
     },
     addService: (state, action) => {
       state.service = action.payload.service;
