@@ -4,6 +4,7 @@ import {
   addService,
   removeService,
   addAddOn,
+  removeAddOn,
   removeAddOns,
 } from "../../../../features/cart/cartSlice";
 import CheckIcon from "@mui/icons-material/Check";
@@ -11,8 +12,13 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useSelector } from "react-redux";
 
 import { ServiceCardStyles, IconBtnStyles } from "./service-card.styles";
+import { useEffect } from "react";
 
 const ServiceCard = ({ service }) => {
+  //how to not add duplicates
+  //how to target only addons with more styling
+  //should I add flags to objects
+
   const { id, title, duration, price } = service;
 
   const dispatch = useDispatch();
@@ -21,12 +27,22 @@ const ServiceCard = ({ service }) => {
   const selectedAddOns = useSelector((state) => state.cart.addOns);
 
   const [isHovered, setIsHovered] = useState(false);
+  const [isSelected, setIsSelected] = useState(null);
+  const [isAddOn, setIsAddOn] = useState(false);
+
+  useEffect(() => {
+    id && selectedService && setIsSelected(id === selectedService.id);
+    id &&
+      selectedAddOns &&
+      setIsAddOn(selectedAddOns.some((addOn) => addOn.id === id));
+  }, [selectedService, selectedAddOns, id]);
 
   const clickHandler = () => {
     if (isHovered) onClearHandler();
     else if (!selectedService) {
       dispatch(addService({ service }));
-    } else dispatch(addAddOn({ addOn: service }));
+    } else if (!isAddOn) dispatch(addAddOn({ addOn: service }));
+    else dispatch(removeAddOn({ addOn: service }));
   };
 
   const handleMouseEnter = () => {
@@ -42,16 +58,17 @@ const ServiceCard = ({ service }) => {
     dispatch(removeAddOns());
   };
 
-  var isSelected = false;
-  if (id && selectedService) isSelected = id === selectedService.id;
+  // var isSelected = false;
+  // if (id && selectedService) isSelected = id === selectedService.id;
 
-  console.log(selectedAddOns);
+  const serviceClassName = isSelected
+    ? "isSelected"
+    : isAddOn
+    ? "isAddOn"
+    : "notSelected";
 
   return (
-    <ServiceCardStyles
-      onClick={clickHandler}
-      className={isSelected ? "isSelected" : "notSelected"}
-    >
+    <ServiceCardStyles onClick={clickHandler} className={serviceClassName}>
       <div className={`service ${isSelected ? "isSelected" : "notSelected"}`}>
         <p className={`title ${isSelected ? "isSelected" : "notSelected"}`}>
           {title.toUpperCase()}

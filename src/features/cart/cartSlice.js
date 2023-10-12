@@ -22,7 +22,16 @@ const cartSlice = createSlice({
       state.service = null;
     },
     addAddOn: (state, action) => {
-      state.addOns = [...state.addOns, action.payload.addOn];
+      const addExists = state.addOns.some(
+        (service) => action.payload.addOn.id === service.id
+      );
+
+      if (!addExists) state.addOns = [...state.addOns, action.payload.addOn];
+    },
+    removeAddOn: (state, action) => {
+      state.addOns = state.addOns.filter(
+        (addOn) => addOn.id !== action.payload.addOn.id
+      );
     },
     removeAddOns: (state) => {
       state.addOns = [];
@@ -35,6 +44,7 @@ export const {
   addService,
   removeService,
   addAddOn,
+  removeAddOn,
   removeAddOns,
 } = cartSlice.actions;
 export default cartSlice.reducer;

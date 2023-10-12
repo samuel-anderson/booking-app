@@ -42,6 +42,10 @@ export const ServiceCardStyles = styled.div`
     background-color: black;
   }
 
+  &.isAddOn {
+    background-color: rgb(224, 224, 224);
+  }
+
   .title {
     margin: 0px;
     font-size: 12px;
