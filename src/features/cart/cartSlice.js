@@ -7,7 +7,8 @@ const cartSlice = createSlice({
       id: null,
       name: "",
     },
-    services: [],
+    service: null,
+    addOns: [],
   },
   reducers: {
     setProfessional: (state, action) => {
@@ -15,10 +16,25 @@ const cartSlice = createSlice({
       state.professional.name = action.payload.name;
     },
     addService: (state, action) => {
-      state.services = [...state.services, action.payload.service];
+      state.service = action.payload.service;
+    },
+    removeService: (state) => {
+      state.service = null;
+    },
+    addAddOn: (state, action) => {
+      state.addOns = [...state.addOns, action.payload.addOn];
+    },
+    removeAddOns: (state) => {
+      state.addOns = [];
     },
   },
 });
 
-export const { setProfessional, addService } = cartSlice.actions;
+export const {
+  setProfessional,
+  addService,
+  removeService,
+  addAddOn,
+  removeAddOns,
+} = cartSlice.actions;
 export default cartSlice.reducer;

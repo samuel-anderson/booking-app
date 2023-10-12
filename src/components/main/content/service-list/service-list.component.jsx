@@ -1,27 +1,17 @@
 import { ServicesContainer } from "./service-list.styles";
 import ServiceCard from "../service-card/service-card.component";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 const ServiceList = () => {
   const services = useSelector((state) => state.services.services);
+  const selectedService = useSelector((state) => state.cart.service);
+
   const serviceList = services[0].data.items;
-  const [selectedService, setSelectedService] = useState(null);
-
-  const onSelectHandler = (service) => {
-    setSelectedService(service);
-  };
-
-  const onAddHandler = (service) => {
-    console.log("Add");
-  };
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       Choose a service
-      {selectedService && (
-        <ServiceCard service={selectedService} isSelected={true} />
-      )}
+      {selectedService && <ServiceCard service={selectedService} />}
       <ServicesContainer>
         {serviceList
           .filter((service) => {
@@ -31,12 +21,7 @@ const ServiceList = () => {
           .map((service) => {
             return (
               <div key={service.id}>
-                <ServiceCard
-                  service={service}
-                  onClickHandler={
-                    selectedService ? onAddHandler : onSelectHandler
-                  }
-                />
+                <ServiceCard service={service} />
               </div>
             );
           })}

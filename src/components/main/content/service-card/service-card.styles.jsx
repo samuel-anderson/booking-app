@@ -1,17 +1,38 @@
 import { styled } from "styled-components";
 
+export const IconBtnStyles = styled.div`
+  display: flex;
+  justify-content: center;
+  background: rgb(255, 255, 255);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  align-items: center;
+  cursor: pointer;
+
+  position: absolute;
+  top: -12px;
+  right: -12px;
+
+  .icon {
+    width: 24px;
+    height: 20px;
+    color: black;
+  }
+`;
+
 export const ServiceCardStyles = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 166px;
   min-height: 124px;
-
+  cursor: pointer;
   padding: 20px 16px;
 
   border: 1px solid rgb(202, 202, 202);
   border-radius: 16px;
-  cursor: pointer;
+
   font-size: 16px;
 
   transition-property: border-color, background-color, box-shadow;
