@@ -19,7 +19,9 @@ const ServiceList = () => {
   return (
     <div>
       Choose a service
-      {selectedService && <ServiceCard service={selectedService} />}
+      {selectedService && (
+        <ServiceCard service={selectedService} isselected={true} />
+      )}
       <ServicesContainer>
         {serviceList
           .filter((service) => {
