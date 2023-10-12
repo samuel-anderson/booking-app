@@ -14,35 +14,44 @@ export const ServiceCardStyles = styled.div`
   cursor: pointer;
   font-size: 16px;
 
-  background-color: ${({ isselected }) => {
-    const color = isselected === "true" ? "black" : "";
-    return color;
-  }};
-
   transition-property: border-color, background-color, box-shadow;
   transition-duration: 0.15s;
 
+  &.isSelected {
+    background-color: black;
+  }
+
   .title {
     margin: 0px;
-    color: ${({ isselected }) => {
-      return isselected === "true" ? "white" : "rgb(0, 0, 0)";
-    }};
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
     font-family: "SF Pro Display";
+
+    &.isSelected {
+      color: white;
+    }
+
+    &.notSelected {
+      color: rgb(0, 0, 0);
+    }
   }
 
   .duration {
     margin: 0px;
-    color: ${({ isselected }) => {
-      return isselected === "true" ? "white" : "rgba(60, 60, 67, 0.6)";
-    }};
     font-family: "SF Pro Text";
     font-size: 11px;
     font-weight: normal;
     line-height: 15px;
     letter-spacing: -0.08px;
+
+    &.isSelected {
+      color: white;
+    }
+
+    &.notSelected {
+      color: rgba(60, 60, 67, 0.6);
+    }
   }
 
   .price {
@@ -50,39 +59,34 @@ export const ServiceCardStyles = styled.div`
     right: 0px;
     bottom: 16px;
     padding: 4px 12px;
-    color: ${({ isselected }) => {
-      return isselected === "true" ? "white" : "rgb(0, 0, 0)";
-    }};
-
-    background: ${({ isselected }) => {
-      return isselected === "true" ? "rgb(53, 53, 53)" : "rgb(238, 238, 238)";
-    }};
-
     border-radius: 8px 0px 0px 8px;
-
     margin: 0px;
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
     font-family: "SF Pro Display";
+
+    &.isSelected {
+      color: white;
+      background: rgb(53, 53, 53);
+    }
+
+    &.notSelected {
+      color: rgb(0, 0, 0);
+      background: rgb(238, 238, 238);
+    }
   }
 
-  ${({ isselected }) => {
-    return (
-      isselected !== "true" &&
-      `
-    &:hover {
-      border-color: rgb(230, 230, 230);
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 16px 24px 0px;
-      background-color: rgb(255, 255, 255);
-      transform: translateY(-3px);
-    }
-  
-    &:active,
-    &:focus {
-      transform: translateY(1px);
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 12px 0px;
-    }`
-    );
-  }};
+  &.notSelected:hover {
+    border-color: rgb(230, 230, 230);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 16px 24px 0px;
+    background-color: rgb(255, 255, 255);
+    transform: translateY(-3px);
+  }
+
+  &.notSelected:active,
+  &.notSelected:focus {
+    transform: translateY(1px);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 12px 0px;
+  }
 `;

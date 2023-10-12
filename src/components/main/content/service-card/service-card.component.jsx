@@ -3,12 +3,12 @@ import { addService } from "../../../../features/cart/cartSlice";
 
 import { ServiceCardStyles } from "./service-card.styles";
 
-const ServiceCard = ({ service, onClickHandler, isselected }) => {
+const ServiceCard = ({ service, onClickHandler, isSelected }) => {
   const { title, duration, price } = service;
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    if (!isselected) {
+    if (!isSelected) {
       dispatch(addService({ service }));
       onClickHandler(service);
     }
@@ -17,13 +17,19 @@ const ServiceCard = ({ service, onClickHandler, isselected }) => {
   return (
     <ServiceCardStyles
       onClick={clickHandler}
-      isselected={isselected && isselected.toString()}
+      className={isSelected ? "isSelected" : "notSelected"}
     >
-      <div className="service">
-        <p className="title">{title.toUpperCase()}</p>
-        <p className="duration">{duration} min</p>
+      <div className={`service ${isSelected ? "isSelected" : "notSelected"}`}>
+        <p className={`title ${isSelected ? "isSelected" : "notSelected"}`}>
+          {title.toUpperCase()}
+        </p>
+        <p className={`duration ${isSelected ? "isSelected" : "notSelected"}`}>
+          {duration} min
+        </p>
       </div>
-      <p className="price">${price}</p>
+      <p className={`price ${isSelected ? "isSelected" : "notSelected"}`}>
+        ${price}
+      </p>
     </ServiceCardStyles>
   );
 };

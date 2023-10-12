@@ -20,7 +20,7 @@ const ServiceList = () => {
     <div>
       Choose a service
       {selectedService && (
-        <ServiceCard service={selectedService} isselected={true} />
+        <ServiceCard service={selectedService} isSelected={true} />
       )}
       <ServicesContainer>
         {serviceList
