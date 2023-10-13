@@ -17,4 +17,11 @@ export const FooterStyle = styled.footer`
 
   padding-left: 80px;
   padding-right: 80px;
+
+  /* Use a media query to hide the footer on mobile devices */
+  @media (max-width: 768px) {
+    & {
+      display: none;
+    }
+  }
 `;

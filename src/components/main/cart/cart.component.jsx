@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { CartStyles } from "./cart.styles";
+
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const activeStep = useSelector((state) => state.step.activeStep);
