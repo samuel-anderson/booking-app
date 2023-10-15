@@ -1,52 +1,20 @@
 import { BottomSheet } from "./mobile-car.styles";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const MobileCart = () => {
   const selectedService = useSelector((state) => state.cart.service);
+  const [isClosed, setIsClosed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const [isScrollinglUp, setIsScrollingUp] = useState(false);
-  const [prevScrollY, setPrevScrollY] = useState(0);
-
   useEffect(() => {
-    if (!selectedService) {
-      setIsExpanded(false);
-      setIsScrollingUp(false);
-    }
+    if (!selectedService) setIsClosed(false);
+    setIsExpanded(false);
   }, [selectedService]);
 
-  const toggleBottomSheet = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (selectedService && !isExpanded) {
-        const currentScrollY = window.scrollY;
-
-        if (currentScrollY > prevScrollY) {
-          setIsScrollingUp(false);
-        } else if (currentScrollY < prevScrollY) {
-          setIsScrollingUp(true);
-        }
-
-        setPrevScrollY(currentScrollY);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      // Clean up the event listener when the component unmounts
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [selectedService, isExpanded, prevScrollY]);
-
   const cartVisibility = () => {
-    if (isExpanded) return "expanded";
-    else if (isScrollinglUp) return "closed";
-    else return "open";
+    if (isClosed) return "closed";
+    else if (isExpanded) return "expanded";
   };
 
   return (
@@ -54,11 +22,17 @@ const MobileCart = () => {
       <BottomSheet>
         <div
           className={`bottom-sheet ${
-            selectedService ? "visible" : ""
+            selectedService ? "open" : ""
           } ${cartVisibility()}`}
         >
-          <button onClick={toggleBottomSheet}>Icon</button>
-          {!isScrollinglUp && <div className="content"></div>}
+          {!isExpanded && (
+            <button onClick={() => setIsClosed(!isClosed)}>Open/Close</button>
+          )}
+          {!isClosed && (
+            <button onClick={() => setIsExpanded(!isExpanded)}>Expand</button>
+          )}
+
+          {!isClosed && <div className="content"></div>}
         </div>
       </BottomSheet>
     </>
