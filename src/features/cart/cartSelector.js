@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectServce = (state) => state.cart.service;
+const selectService = (state) => state.cart.service;
 const selectAddOns = (state) => state.cart.addOns;
 
 export const selectOrderTotal = createSelector(
-  selectServce,
+  selectService,
   selectAddOns,
   (service, addOns) => {
     const servicePrice = service ? service.price : 0;

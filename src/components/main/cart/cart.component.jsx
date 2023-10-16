@@ -38,8 +38,6 @@ const Cart = () => {
           <div>{orderDiplay}</div>
         </div>
       )}
-      {/* {cart.addOns.length > 0 &&
-        cart.addOns.map((addOn, idx) => <div key={idx}>{addOn.title}</div>)} */}
     </CartStyles>
   );
 };
