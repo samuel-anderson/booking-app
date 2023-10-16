@@ -53,7 +53,7 @@ export const deleteDocument = async (collectionName, id) => {
 
 /**************** **************** **************** **************** */
 /**************** **************** **************** **************** */
-const messaging = getMessaging(app);
+export const messaging = getMessaging(app);
 
 export const requestForToken = () => {
   return getToken(messaging, {

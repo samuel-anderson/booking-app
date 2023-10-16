@@ -1,20 +1,31 @@
 import { BottomSheet } from "./mobile-car.styles";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { selectOrderTotal } from "../../../features/cart/cartSelector";
 
 const MobileCart = () => {
-  const selectedService = useSelector((state) => state.cart.service);
   const [isClosed, setIsClosed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const orderTotal = useSelector(selectOrderTotal);
+  const cart = useSelector((state) => state.cart);
+
   useEffect(() => {
-    if (!selectedService) setIsClosed(false);
+    if (!cart.service) setIsClosed(false);
     setIsExpanded(false);
-  }, [selectedService]);
+  }, [cart.service]);
 
   const cartVisibility = () => {
     if (isClosed) return "closed";
     else if (isExpanded) return "expanded";
+  };
+
+  const showOrderTotal = () => {
+    return orderTotal !== 0 ? ` $${orderTotal}` : "";
+  };
+
+  const showProfessional = () => {
+    return cart.professional ? cart.professional.name : "Any Professional";
   };
 
   return (
@@ -22,7 +33,7 @@ const MobileCart = () => {
       <BottomSheet>
         <div
           className={`bottom-sheet ${
-            selectedService ? "open" : ""
+            cart.service ? "open" : ""
           } ${cartVisibility()}`}
         >
           {!isExpanded && (
@@ -32,7 +43,12 @@ const MobileCart = () => {
             <button onClick={() => setIsExpanded(!isExpanded)}>Expand</button>
           )}
 
-          {!isClosed && <div className="content"></div>}
+          {!isClosed && (
+            <div className="content">
+              <span>{showProfessional()}</span>
+              <span>{showOrderTotal()}</span>
+            </div>
+          )}
         </div>
       </BottomSheet>
     </>

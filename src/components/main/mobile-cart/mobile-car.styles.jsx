@@ -29,5 +29,7 @@ export const BottomSheet = styled.div`
 
   .content {
     padding: 16px;
+    display: flex;
+    justify-content: space-between;
   }
 `;
