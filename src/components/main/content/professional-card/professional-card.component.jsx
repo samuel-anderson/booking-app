@@ -13,7 +13,7 @@ const ProfessionalCard = ({ professional }) => {
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(setProfessional({ professional }));
+    dispatch(setProfessional({ professional: professional.data }));
     navigate();
   };
 

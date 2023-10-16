@@ -13,7 +13,7 @@ export const ProfessionalCardStyles = styled.div`
   cursor: pointer;
 
   img {
-    width: 75%;
+    width: 35%;
   }
 
   transition-property: border-color, background-color, box-shadow;

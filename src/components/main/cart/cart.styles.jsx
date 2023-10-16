@@ -11,4 +11,22 @@ export const CartStyles = styled.div`
   box-shadow: rgba(0, 0, 0, 0.06) 0px 4px 16px 0px;
   background-color: rgb(255, 255, 255);
   right: 40px;
+
+  .order-text {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+
+  .order-total {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .order-info {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
