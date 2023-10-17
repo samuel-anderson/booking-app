@@ -67,7 +67,6 @@ export const requestForToken = () => {
           device_token: currentToken,
           name: "sam_anderson",
         });
-        alert(currentToken);
         // Perform any other neccessary action with the token
       } else {
         // Show permission request UI
