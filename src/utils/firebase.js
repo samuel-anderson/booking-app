@@ -62,13 +62,17 @@ export const requestForToken = () => {
   })
     .then((currentToken) => {
       if (currentToken) {
-        console.log("current token for client: ", currentToken);
+        //console.log("current token for client: ", currentToken);
+        addDocument("devices", {
+          device_token: currentToken,
+          name: "sam_anderson",
+        });
         // Perform any other neccessary action with the token
       } else {
         // Show permission request UI
-        console.log(
-          "No registration token available. Request permission to generate one."
-        );
+        // console.log(
+        //   "No registration token available. Request permission to generate one."
+        // );
       }
     })
     .catch((err) => {
