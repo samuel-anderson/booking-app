@@ -56,6 +56,21 @@ export const deleteDocument = async (collectionName, id) => {
 export const messaging = getMessaging(app);
 
 export const requestForToken = () => {
+  if ("Notification" in window) {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        // Permission granted, you can now generate the FCM token.
+        const messaging = getMessaging();
+        getToken(messaging, {
+          vapidKey:
+            "BHBuYSNaHECd59Ek8fc2Wix3cmmm3OrMcdeeaEhbMh9Qb2wN6-oNLW_n6EclwNZyqDmG1SvjmHVXV6RTTgxOWwo",
+        }).then((token) => {
+          console.log("FCM Token:", token);
+        });
+      }
+    });
+  }
+
   return getToken(messaging, {
     vapidKey:
       "BHBuYSNaHECd59Ek8fc2Wix3cmmm3OrMcdeeaEhbMh9Qb2wN6-oNLW_n6EclwNZyqDmG1SvjmHVXV6RTTgxOWwo",
