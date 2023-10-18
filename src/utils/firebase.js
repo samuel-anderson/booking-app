@@ -56,7 +56,6 @@ export const deleteDocument = async (collectionName, id) => {
 export const messaging = getMessaging(app);
 
 export const requestForToken = () => {
-  debugger;
   if ("Notification" in window) {
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
