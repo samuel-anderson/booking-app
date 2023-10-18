@@ -15,10 +15,6 @@ import { ServiceCardStyles, IconBtnStyles } from "./service-card.styles";
 import { useEffect } from "react";
 
 const ServiceCard = ({ service }) => {
-  //how to not add duplicates
-  //how to target only addons with more styling
-  //should I add flags to objects
-
   const { id, title, duration, price } = service;
 
   const dispatch = useDispatch();

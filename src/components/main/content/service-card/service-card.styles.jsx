@@ -48,10 +48,9 @@ export const ServiceCardStyles = styled.div`
 
   .title {
     margin: 0px;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 16px;
-    font-family: "SF Pro Display";
 
     &.isSelected {
       color: white;
@@ -64,8 +63,7 @@ export const ServiceCardStyles = styled.div`
 
   .duration {
     margin: 0px;
-    font-family: "SF Pro Text";
-    font-size: 11px;
+    font-size: 13px;
     font-weight: normal;
     line-height: 15px;
     letter-spacing: -0.08px;
@@ -89,7 +87,6 @@ export const ServiceCardStyles = styled.div`
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
-    font-family: "SF Pro Display";
 
     &.isSelected {
       color: white;

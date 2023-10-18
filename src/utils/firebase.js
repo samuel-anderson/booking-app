@@ -56,6 +56,7 @@ export const sendSMS = async ({
   date,
   time,
   service,
+  clientPhoneNumber,
 }) => {
   try {
     fetch(
@@ -67,7 +68,7 @@ export const sendSMS = async ({
         },
         body: JSON.stringify({
           to: professionalPhoneNumber,
-          body: `You have an appt with ${clientName} - ${date} at ${time}. ${service}`,
+          body: `You have an appt with ${clientName} - ${date} at ${time}. ${service}. Client # - ${clientPhoneNumber}`,
         }),
       }
     )

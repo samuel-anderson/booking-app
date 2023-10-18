@@ -1,13 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const CART_INITIAL_STATE = {
+  professional: null,
+  service: null,
+  addOns: [],
+};
+
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    professional: null,
-    service: null,
-    addOns: [],
-  },
+  initialState: CART_INITIAL_STATE,
   reducers: {
+    emptyCart: (state) => {
+      state.professional = null;
+      state.service = null;
+      state.addOns = [];
+    },
     setProfessional: (state, action) => {
       state.professional = action.payload.professional;
     },
@@ -36,6 +43,7 @@ const cartSlice = createSlice({
 });
 
 export const {
+  emptyCart,
   setProfessional,
   addService,
   removeService,

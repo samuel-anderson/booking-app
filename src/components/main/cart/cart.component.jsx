@@ -3,6 +3,7 @@ import { CartStyles } from "./cart.styles";
 import CartSkeleton from "../cart-skeleton/cart-skeleton.component";
 import { selectOrderTotal } from "../../../features/cart/cartSelector";
 import { sendSMS } from "../../../utils/firebase";
+import Button from "../content/button/button.component";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -35,13 +36,14 @@ const Cart = () => {
 
   const bookingTestHandler = () => {
     sendSMS({
-      clientName: "Kari Anderson",
+      clientName: "TEST CLIENT",
       professionalPhoneNumber: cart.professional.phoneNumber
         ? cart.professional.phoneNumber
-        : "+18583543893",
+        : "+7602774923",
       date: "TODAY",
       time: "5:00pm",
       service: cart.service.title + showAddOns(),
+      clientPhoneNumber: "7609893444",
     });
   };
 
@@ -61,7 +63,7 @@ const Cart = () => {
         </div>
       )}
 
-      <button onClick={bookingTestHandler}>Book (TEST)</button>
+      <Button onClick={bookingTestHandler} text="FINISH" classStyle="default" />
     </CartStyles>
   );
 };
