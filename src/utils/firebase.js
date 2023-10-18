@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getMessaging, getToken } from "firebase/messaging";
 import { firebaseConfig } from "../config/firebase";
 
 import {
@@ -14,7 +13,7 @@ import {
 } from "firebase/firestore";
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const db = getFirestore();
 
 export const fetchCollection = async (collectionName) => {
@@ -51,46 +50,29 @@ export const deleteDocument = async (collectionName, id) => {
   }
 };
 
-/**************** **************** **************** **************** */
-/**************** **************** **************** **************** */
-export const messaging = getMessaging(app);
-
-export const requestForToken = () => {
-  if ("Notification" in window) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        // Permission granted, you can now generate the FCM token.
-        const messaging = getMessaging();
-        getToken(messaging, {
-          vapidKey:
-            "BHBuYSNaHECd59Ek8fc2Wix3cmmm3OrMcdeeaEhbMh9Qb2wN6-oNLW_n6EclwNZyqDmG1SvjmHVXV6RTTgxOWwo",
-        }).then((token) => {
-          console.log("FCM Token:", token);
-        });
+export const sendSMS = async () => {
+  const name = "Samuel Anderson";
+  const date = "1/1/2023";
+  const time = "3:30pm";
+  const service = "Shave (No Razor) with +3 Addons";
+  try {
+    fetch(
+      "https://us-central1-crwn-clothing-db-b150d.cloudfunctions.net/sendSMS",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: "+17602774923",
+          body: `You have an appt with ${name} - ${date} at ${time}. ${service}`,
+        }),
       }
-    });
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  } catch (error) {
+    console.error("Error creating document:", error);
   }
-
-  return getToken(messaging, {
-    vapidKey:
-      "BHBuYSNaHECd59Ek8fc2Wix3cmmm3OrMcdeeaEhbMh9Qb2wN6-oNLW_n6EclwNZyqDmG1SvjmHVXV6RTTgxOWwo",
-  })
-    .then((currentToken) => {
-      if (currentToken) {
-        //console.log("current token for client: ", currentToken);
-        addDocument("devices", {
-          device_token: currentToken,
-          name: "sam_anderson",
-        });
-        // Perform any other neccessary action with the token
-      } else {
-        // Show permission request UI
-        // console.log(
-        //   "No registration token available. Request permission to generate one."
-        // );
-      }
-    })
-    .catch((err) => {
-      console.log("An error occurred while retrieving token. ", err);
-    });
 };
