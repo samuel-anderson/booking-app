@@ -50,11 +50,13 @@ export const deleteDocument = async (collectionName, id) => {
   }
 };
 
-export const sendSMS = async () => {
-  const name = "Samuel Anderson";
-  const date = "1/1/2023";
-  const time = "3:30pm";
-  const service = "Shave (No Razor) with +3 Addons";
+export const sendSMS = async ({
+  clientName,
+  professionalPhoneNumber,
+  date,
+  time,
+  service,
+}) => {
   try {
     fetch(
       "https://us-central1-crwn-clothing-db-b150d.cloudfunctions.net/sendSMS",
@@ -64,8 +66,8 @@ export const sendSMS = async () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          to: "+17602774923",
-          body: `You have an appt with ${name} - ${date} at ${time}. ${service}`,
+          to: professionalPhoneNumber,
+          body: `You have an appt with ${clientName} - ${date} at ${time}. ${service}`,
         }),
       }
     )

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { CartStyles } from "./cart.styles";
 import CartSkeleton from "../cart-skeleton/cart-skeleton.component";
 import { selectOrderTotal } from "../../../features/cart/cartSelector";
+import { sendSMS } from "../../../utils/firebase";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -32,6 +33,18 @@ const Cart = () => {
     else return ` with ${cart.addOns.length} addons`;
   };
 
+  const bookingTestHandler = () => {
+    sendSMS({
+      clientName: "Kari Anderson",
+      professionalPhoneNumber: cart.professional.phoneNumber
+        ? cart.professional.phoneNumber
+        : "+18583543893",
+      date: "TODAY",
+      time: "5:00pm",
+      service: cart.service.title + showAddOns(),
+    });
+  };
+
   return (
     <CartStyles>
       <div className="order-text">Your Order </div>
@@ -47,6 +60,8 @@ const Cart = () => {
           <div>{showOrderTotal()}</div>
         </div>
       )}
+
+      <button onClick={bookingTestHandler}>Book (TEST)</button>
     </CartStyles>
   );
 };
