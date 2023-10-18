@@ -1,8 +1,8 @@
 import { BtnContainer } from "./button.styles";
 
-const Button = ({ text, classStyle }) => {
+const Button = ({ clickHandler, text, classStyle }) => {
   return (
-    <BtnContainer className={`.${classStyle}`}>
+    <BtnContainer className={`.${classStyle}`} onClick={clickHandler}>
       <p>{text}</p>
     </BtnContainer>
   );

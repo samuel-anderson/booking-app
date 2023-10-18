@@ -63,7 +63,11 @@ const Cart = () => {
         </div>
       )}
 
-      <Button onClick={bookingTestHandler} text="FINISH" classStyle="default" />
+      <Button
+        clickHandler={bookingTestHandler}
+        text="FINISH"
+        classStyle="default"
+      />
     </CartStyles>
   );
 };
