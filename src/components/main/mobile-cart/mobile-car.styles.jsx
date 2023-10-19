@@ -16,7 +16,7 @@ export const BottomSheet = styled.div`
     transition: height 0.5s ease-in-out;
 
     &.open {
-      height: 125px;
+      height: 145px;
 
       &.closed {
         height: auto;

@@ -37,7 +37,7 @@ const useSMS = () => {
         clientName: "TEST CLIENT",
         professionalPhoneNumber: cart.professional.phoneNumber
           ? cart.professional.phoneNumber
-          : "+7602774923",
+          : "+8583543893",
         date: "TODAY",
         time: "5:00pm",
         service: cart.service.title + showAddOns(),
