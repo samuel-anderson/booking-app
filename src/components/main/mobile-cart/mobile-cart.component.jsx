@@ -2,6 +2,8 @@ import { BottomSheet } from "./mobile-car.styles";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectOrderTotal } from "../../../features/cart/cartSelector";
+import Button from "../content/button/button.component";
+import useSMS from "../../../hooks/useSMS";
 
 const MobileCart = () => {
   const [isClosed, setIsClosed] = useState(false);
@@ -9,6 +11,8 @@ const MobileCart = () => {
 
   const orderTotal = useSelector(selectOrderTotal);
   const cart = useSelector((state) => state.cart);
+
+  const { submitBooking } = useSMS();
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
@@ -48,6 +52,14 @@ const MobileCart = () => {
               <span>{showProfessional()}</span>
               <span>{showOrderTotal()}</span>
             </div>
+          )}
+
+          {!isClosed && (
+            <Button
+              clickHandler={submitBooking}
+              text="FINISH"
+              classStyle="default"
+            />
           )}
         </div>
       </BottomSheet>

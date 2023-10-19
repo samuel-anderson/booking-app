@@ -40,6 +40,10 @@ export const ServiceCardStyles = styled.div`
 
   &.isSelected {
     background-color: black;
+
+    @media (max-width: 768px) {
+      background-color: rgb(0, 131, 255);
+    }
   }
 
   &.isAddOn {
@@ -54,6 +58,10 @@ export const ServiceCardStyles = styled.div`
 
     &.isSelected {
       color: white;
+
+      @media (max-width: 768px) {
+        color: black;
+      }
     }
 
     &.notSelected {
@@ -70,6 +78,10 @@ export const ServiceCardStyles = styled.div`
 
     &.isSelected {
       color: white;
+
+      @media (max-width: 768px) {
+        color: black;
+      }
     }
 
     &.notSelected {
@@ -91,11 +103,20 @@ export const ServiceCardStyles = styled.div`
     &.isSelected {
       color: white;
       background: rgb(53, 53, 53);
+
+      @media (max-width: 768px) {
+        color: black;
+        background-color: rgba(255, 255, 255, 0.16);
+      }
     }
 
     &.notSelected {
       color: rgb(0, 0, 0);
       background: rgb(238, 238, 238);
+
+      @media (max-width: 768px) {
+        background-color: rgba(186, 186, 186, 0.5);
+      }
     }
   }
 

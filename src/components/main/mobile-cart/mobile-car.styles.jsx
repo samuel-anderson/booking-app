@@ -7,7 +7,8 @@ export const BottomSheet = styled.div`
     height: 0;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: black;
+    color: white;
     z-index: 999;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
     border-top-left-radius: 5%;
@@ -15,7 +16,7 @@ export const BottomSheet = styled.div`
     transition: height 0.5s ease-in-out;
 
     &.open {
-      height: 100px;
+      height: 125px;
 
       &.closed {
         height: auto;
@@ -31,5 +32,9 @@ export const BottomSheet = styled.div`
     padding: 16px;
     display: flex;
     justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
   }
 `;

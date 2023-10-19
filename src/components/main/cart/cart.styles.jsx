@@ -40,4 +40,8 @@ export const CartStyles = styled.div`
   .with {
     color: rgba(60, 60, 67, 0.6);
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
