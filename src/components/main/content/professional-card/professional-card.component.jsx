@@ -23,7 +23,7 @@ const ProfessionalCard = ({ professional }) => {
   };
   return (
     <ProfessionalCardStyles onClick={clickHandler}>
-      <img src="/images/ryan_johnson.jpg" alt={`${name}`} />
+      {/* <img src="/images/ryan_johnson.jpg" alt={`${name}`} /> */}
       <span>{name}</span>
       {/* <span>nextAvailableTime</span> */}
     </ProfessionalCardStyles>

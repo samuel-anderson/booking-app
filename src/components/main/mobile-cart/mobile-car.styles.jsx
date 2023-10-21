@@ -28,13 +28,35 @@ export const BottomSheet = styled.div`
     }
   }
 
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  .order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+  }
+
   .content {
-    padding: 16px;
+    padding: 10px;
+    margin-left: 30px;
+  }
+  .order-total {
     display: flex;
     justify-content: space-between;
   }
 
-  @media (min-width: 768px) {
-    display: none;
+  .order-info {
+    display: flex;
+    justify-content: space-between;
+
+    color: gray;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: -0.24px;
+    margin-left: 30px;
   }
 `;
