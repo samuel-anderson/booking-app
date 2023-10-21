@@ -20,36 +20,9 @@ const MobileCart = () => {
   const [isClosed, setIsClosed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [prevScrollY, setPrevScrollY] = useState(0);
-
   const cart = useSelector((state) => state.cart);
 
   const { submitBooking, showOrder, showAddOns } = useSMS();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > prevScrollY) {
-        setIsScrollingUp(false);
-        setIsClosed(true);
-      } else {
-        setIsScrollingUp(true);
-        setIsClosed(false);
-      }
-
-      setPrevScrollY(currentScrollY);
-    };
-
-    // Attach the event listener when the component mounts
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [prevScrollY]);
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
@@ -60,14 +33,6 @@ const MobileCart = () => {
     if (isClosed) return "closed";
     else if (isExpanded) return "expanded";
   };
-
-  // const showOrderTotal = () => {
-  //   return orderTotal !== 0 ? ` $${orderTotal}` : "";
-  // };
-
-  // const showProfessional = () => {
-  //   return cart.professional ? cart.professional.name : "Any Professional";
-  // };
 
   return (
     <>
