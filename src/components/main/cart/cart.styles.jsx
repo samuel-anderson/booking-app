@@ -45,3 +45,10 @@ export const CartStyles = styled.div`
     display: none;
   }
 `;
+
+export const BtnContainer = styled.div`
+  position: absolute;
+  bottom: 25px;
+  width: 90%;
+  left: 20px;
+`;

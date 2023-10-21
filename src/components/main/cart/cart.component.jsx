@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { CartStyles } from "./cart.styles";
+import { CartStyles, BtnContainer } from "./cart.styles";
 import CartSkeleton from "../cart-skeleton/cart-skeleton.component";
 import Button from "../content/button/button.component";
 
@@ -27,7 +27,15 @@ const Cart = () => {
         </div>
       )}
 
-      <Button clickHandler={submitBooking} text="FINISH" classStyle="default" />
+      {cart.service && (
+        <BtnContainer>
+          <Button
+            clickHandler={submitBooking}
+            text="FINISH"
+            classStyle="default"
+          />
+        </BtnContainer>
+      )}
     </CartStyles>
   );
 };
