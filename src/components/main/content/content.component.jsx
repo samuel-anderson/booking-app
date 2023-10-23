@@ -1,21 +1,21 @@
 import { Routes, Route } from "react-router-dom";
-
-import ProfessionalList from "./professional-list/professional-list.component";
-import ServiceList from "./service-list/service-list.component";
-import Steps from "./stepper/stepper.component";
-import Time from "./time/time.component";
-import Completed from "./completed/completed.component";
+import Professional from "../../../routes/professional/professional.component";
+import Service from "../../../routes/service/service.component";
+import Availability from "../../../routes/availability/availability.component";
+import Step from "../../../routes/step/step.component";
+import Done from "../../../routes/done/done.component";
 import { ContentStyles } from "./content.styles";
 
 const Content = () => {
   return (
     <ContentStyles>
-      <Steps />
       <Routes>
-        <Route path="/" element={<ProfessionalList />} />
-        <Route path="/services" element={<ServiceList />} />
-        <Route path="/time" element={<Time />} />
-        <Route path="/done" element={<Completed />} />
+        <Route path="/" element={<Step />}>
+          <Route index element={<Professional />} />
+          <Route path="/services" element={<Service />} />
+          <Route path="/availability" element={<Availability />} />
+          <Route path="/done" element={<Done />} />
+        </Route>
       </Routes>
     </ContentStyles>
   );

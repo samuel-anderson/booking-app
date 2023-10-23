@@ -23,6 +23,10 @@ export const getStep = (step = STEPS.professional) => {
   }[step];
 };
 
+const getActiveLabelClass = (idx, activeStep) => {
+  return idx <= activeStep ? "activeLabel" : "unActiveLabel";
+};
+
 const Steps = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
   const { navigateAndUpdateStep } = useNavigation();
@@ -44,7 +48,7 @@ const Steps = () => {
         <Step key={label}>
           <StepLabel>
             <Label
-              className={idx <= activeStep ? "activeLabel" : "unActiveLabel"}
+              className={getActiveLabelClass()}
               onClick={() => {
                 onClickHandler(idx, label);
               }}
