@@ -20,8 +20,10 @@ const useSMS = () => {
 
     const hours = Math.floor(durationTotal / 60);
     const minutes = durationTotal % 60;
+    const hoursTxt = hours === 0 ? "" : `${hours} hr.`;
+    const minTxt = minutes === 0 ? "" : `${minutes} min.`;
 
-    return `${hours} hr. & ${minutes} min.`;
+    return `Est. Time: ${hoursTxt} ${minTxt}`;
   };
 
   const showProfessional = () => {

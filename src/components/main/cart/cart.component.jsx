@@ -20,7 +20,7 @@ const Cart = () => {
   return (
     <CartStyles>
       <div className="order-text">
-        Your Order <span>{showDurationTotal()}</span>
+        Your Order <span className="order-duration">{showDurationTotal()}</span>
       </div>
       {activeStep === 0 && <CartSkeleton />}
       {activeStep === 1 && showOrder()}

@@ -20,6 +20,11 @@ export const CartStyles = styled.div`
     margin-bottom: 24px;
   }
 
+  .order-duration {
+    font-size: 13px;
+    color: rgba(60, 60, 67, 0.9);
+  }
+
   .order-total {
     display: flex;
     justify-content: space-between;
