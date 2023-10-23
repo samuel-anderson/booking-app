@@ -16,3 +16,17 @@ export const selectOrderTotal = createSelector(
     return servicePrice + addOnPrice;
   }
 );
+
+export const selectDurationTotal = createSelector(
+  selectService,
+  selectAddOns,
+  (service, addOns) => {
+    const servicePrice = service ? service.duration : 0;
+    const addOnPrice =
+      addOns.length === 0
+        ? 0
+        : addOns.reduce((total, addOn) => total + addOn.duration, 0);
+
+    return servicePrice + addOnPrice;
+  }
+);

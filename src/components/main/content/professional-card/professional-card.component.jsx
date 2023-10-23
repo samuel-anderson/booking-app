@@ -6,14 +6,12 @@ import { setProfessional } from "../../../../features/cart/cartSlice";
 import { ProfessionalCardStyles } from "./professional-card.styles";
 
 const ProfessionalCard = ({ professional }) => {
-  const {
-    data: { name },
-  } = professional;
+  const { name } = professional;
   const { navigateAndUpdateStep } = useNavigation();
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(setProfessional({ professional: professional.data }));
+    dispatch(setProfessional({ professional: professional }));
     navigate();
   };
 

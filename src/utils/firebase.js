@@ -8,8 +8,9 @@ import {
   getDocs,
   //updateDoc,
   deleteDoc,
-  addDoc,
+  //addDoc,
   doc,
+  writeBatch,
 } from "firebase/firestore";
 
 // Initialize Firebase
@@ -32,13 +33,25 @@ export const fetchCollection = async (collectionName) => {
   return items;
 };
 
-export const addDocument = async (collectionName, data) => {
-  try {
-    const collectionRef = collection(db, collectionName);
-    await addDoc(collectionRef, data);
-  } catch (error) {
-    console.error("Error creating document:", error);
-  }
+// export const addDocument = async (collectionName, data) => {
+//   try {
+//     const collectionRef = collection(db, collectionName);
+//     await addDoc(collectionRef, data);
+//   } catch (error) {
+//     console.error("Error creating document:", error);
+//   }
+// };
+
+export const addDocument = async (collectionKey, jsonObjectsToAdd) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  jsonObjectsToAdd.forEach((jsonObject) => {
+    const docRef = doc(collectionRef, jsonObject.title.toLowerCase());
+    batch.set(docRef, jsonObject);
+  });
+
+  await batch.commit();
 };
 
 export const deleteDocument = async (collectionName, id) => {

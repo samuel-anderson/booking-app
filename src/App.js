@@ -1,14 +1,19 @@
 import { GlobalStyle } from "./styles/globalStyles";
 import Container from "./components/container/container.component";
-import { fetchProfessionalsStart } from "./features/professionals/professionalsSlice";
+import { fetchShopDataStart } from "./features/shop/shopSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+// import { BARBER_SHOP_DATA } from "./data/index";
+// import { createDocument } from "./api/firebase/firebaseApi";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProfessionalsStart());
+    dispatch(fetchShopDataStart());
+
+    // createDocument("barber_shop", BARBER_SHOP_DATA);
   }, [dispatch]);
 
   return (

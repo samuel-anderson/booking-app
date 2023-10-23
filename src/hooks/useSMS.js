@@ -1,4 +1,7 @@
-import { selectOrderTotal } from "../features/cart/cartSelector";
+import {
+  selectOrderTotal,
+  selectDurationTotal,
+} from "../features/cart/cartSelector";
 
 import { useSelector } from "react-redux";
 import { sendSMS } from "../utils/firebase";
@@ -6,9 +9,19 @@ import { sendSMS } from "../utils/firebase";
 const useSMS = () => {
   const cart = useSelector((state) => state.cart);
   const orderTotal = useSelector(selectOrderTotal);
+  const durationTotal = useSelector(selectDurationTotal);
 
   const showOrderTotal = () => {
     return orderTotal !== 0 ? `$${orderTotal}` : "";
+  };
+
+  const showDurationTotal = () => {
+    if (durationTotal === 0) return "";
+
+    const hours = Math.floor(durationTotal / 60);
+    const minutes = durationTotal % 60;
+
+    return `${hours} hr. & ${minutes} min.`;
   };
 
   const showProfessional = () => {
@@ -52,6 +65,7 @@ const useSMS = () => {
     showAddOns,
     showProfessional,
     showOrderTotal,
+    showDurationTotal,
   };
 };
 

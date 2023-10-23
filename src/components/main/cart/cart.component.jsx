@@ -9,11 +9,19 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const activeStep = useSelector((state) => state.step.activeStep);
 
-  const { showOrder, showAddOns, showOrderTotal, submitBooking } = useSMS();
+  const {
+    showOrder,
+    showAddOns,
+    showOrderTotal,
+    submitBooking,
+    showDurationTotal,
+  } = useSMS();
 
   return (
     <CartStyles>
-      <div className="order-text">Your Order </div>
+      <div className="order-text">
+        Your Order <span>{showDurationTotal()}</span>
+      </div>
       {activeStep === 0 && <CartSkeleton />}
       {activeStep === 1 && showOrder()}
 
