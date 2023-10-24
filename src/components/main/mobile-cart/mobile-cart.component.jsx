@@ -22,7 +22,7 @@ const MobileCart = () => {
 
   const cart = useSelector((state) => state.cart);
 
-  const { submitBooking, showOrder, showAddOns } = useSMS();
+  const { submitBooking, showOrder, showAddOns, showDurationTotal } = useSMS();
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
@@ -43,7 +43,10 @@ const MobileCart = () => {
           } ${cartVisibility()}`}
         >
           <div className="order">
-            <span className="order-text">Your order</span>
+            <div className="order-text">
+              Your order{" "}
+              <span className="order-duration">{showDurationTotal()}</span>
+            </div>
 
             <IconButton onClick={() => setIsClosed(!isClosed)}>
               {isClosed ? (

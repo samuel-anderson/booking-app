@@ -48,6 +48,11 @@ export const BottomSheet = styled.div`
     justify-content: space-between;
   }
 
+  .order-duration {
+    font-size: 11px;
+    color: gray;
+  }
+
   .order-info {
     display: flex;
     justify-content: space-between;
