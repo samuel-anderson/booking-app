@@ -41,8 +41,7 @@ const ServiceList = () => {
   }, [dispatch, activeStep]);
 
   return (
-    <div style={{ position: "relative" }}>
-      Choose a service
+    <>
       {selectedService && <ServiceCard service={selectedService} />}
       <ServicesContainer>
         {serviceList
@@ -58,7 +57,7 @@ const ServiceList = () => {
             );
           })}
       </ServicesContainer>
-    </div>
+    </>
   );
 };
 

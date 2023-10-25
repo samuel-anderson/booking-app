@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Button from "../content/button/button.component";
 import useSMS from "../../../hooks/useSMS";
+import useNavigation from "../../../hooks/useNavigation";
+import { selectAddOnTotal } from "../../../features/cart/cartSelector";
+import { getStep, STEPS } from "../content/stepper/stepper.component";
 
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -21,8 +24,10 @@ const MobileCart = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const cart = useSelector((state) => state.cart);
+  const addOnTotal = useSelector(selectAddOnTotal);
 
-  const { submitBooking, showOrder, showAddOns, showDurationTotal } = useSMS();
+  const { showOrder, showAddOns, showDurationTotal } = useSMS();
+  const { navigateAndUpdateStep } = useNavigation();
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
@@ -34,6 +39,10 @@ const MobileCart = () => {
     else if (isExpanded) return "expanded";
   };
 
+  const navigate = () => {
+    const { route, step } = getStep(STEPS.availability);
+    navigateAndUpdateStep(route, step);
+  };
   return (
     <>
       <BottomSheet>
@@ -57,10 +66,6 @@ const MobileCart = () => {
             </IconButton>
           </div>
 
-          {/* {!isClosed && (
-            <button onClick={() => setIsExpanded(!isExpanded)}>Expand</button>
-          )} */}
-
           {!isClosed && (
             <div className="content">
               {showOrder()}
@@ -73,13 +78,7 @@ const MobileCart = () => {
               {cart.addOns.length > 0 && (
                 <div className="order-info">
                   <div>{showAddOns().replace("with", "+")}</div>
-                  <div>
-                    $
-                    {cart.addOns.reduce(
-                      (total, addOn) => total + addOn.price,
-                      0
-                    )}
-                  </div>
+                  <div>${addOnTotal}</div>
                 </div>
               )}
             </div>
@@ -87,8 +86,8 @@ const MobileCart = () => {
 
           {!isClosed && (
             <Button
-              clickHandler={submitBooking}
-              text="FINISH"
+              clickHandler={navigate}
+              text="Choose Time"
               classStyle="default"
             />
           )}

@@ -4,18 +4,20 @@ import CartSkeleton from "../cart-skeleton/cart-skeleton.component";
 import Button from "../content/button/button.component";
 
 import useSMS from "../../../hooks/useSMS";
+import useNavigation from "../../../hooks/useNavigation";
+import { getStep, STEPS } from "../content/stepper/stepper.component";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const activeStep = useSelector((state) => state.step.activeStep);
 
-  const {
-    showOrder,
-    showAddOns,
-    showOrderTotal,
-    submitBooking,
-    showDurationTotal,
-  } = useSMS();
+  const { showOrder, showAddOns, showOrderTotal, showDurationTotal } = useSMS();
+
+  const { navigateAndUpdateStep } = useNavigation();
+  const navigate = () => {
+    const { route, step } = getStep(STEPS.availability);
+    navigateAndUpdateStep(route, step);
+  };
 
   return (
     <CartStyles>
@@ -38,8 +40,8 @@ const Cart = () => {
       {cart.service && (
         <BtnContainer>
           <Button
-            clickHandler={submitBooking}
-            text="FINISH"
+            clickHandler={navigate}
+            text="Choose Time"
             classStyle="default"
           />
         </BtnContainer>

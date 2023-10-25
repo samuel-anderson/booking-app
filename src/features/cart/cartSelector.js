@@ -3,6 +3,12 @@ import { createSelector } from "@reduxjs/toolkit";
 const selectService = (state) => state.cart.service;
 const selectAddOns = (state) => state.cart.addOns;
 
+export const selectAddOnTotal = createSelector(selectAddOns, (addOns) => {
+  const total = addOns.reduce((total, addOn) => total + addOn.price, 0);
+  console.log(total);
+  return total;
+});
+
 export const selectOrderTotal = createSelector(
   selectService,
   selectAddOns,

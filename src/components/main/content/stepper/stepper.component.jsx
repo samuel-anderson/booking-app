@@ -10,7 +10,7 @@ const steps = ["Professional", "Service", "Time", "Done"];
 export const STEPS = {
   professional: "professional",
   service: "service",
-  time: "time",
+  availability: "availability",
   done: "done",
 };
 
@@ -18,12 +18,15 @@ export const getStep = (step = STEPS.professional) => {
   return {
     [STEPS.professional]: { step: 0, route: "/" },
     [STEPS.service]: { step: 1, route: "/services" },
-    [STEPS.time]: { step: 2, route: "/time" },
+    [STEPS.availability]: { step: 2, route: "/availability" },
     [STEPS.done]: { step: 3, route: "/done" },
   }[step];
 };
 
 const getActiveLabelClass = (idx, activeStep) => {
+  console.log("idx", idx);
+  console.log("activeStep", activeStep);
+
   return idx <= activeStep ? "activeLabel" : "unActiveLabel";
 };
 
@@ -48,7 +51,7 @@ const Steps = () => {
         <Step key={label}>
           <StepLabel>
             <Label
-              className={getActiveLabelClass()}
+              className={getActiveLabelClass(idx, activeStep)}
               onClick={() => {
                 onClickHandler(idx, label);
               }}

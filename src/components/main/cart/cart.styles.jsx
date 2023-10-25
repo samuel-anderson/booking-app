@@ -4,7 +4,7 @@ export const CartStyles = styled.div`
   position: fixed;
   box-sizing: border-box;
   width: 410px;
-  min-height: 615px;
+  min-height: 575px;
   padding: 32px;
   border: 0.5px solid rgb(225, 225, 225);
   border-radius: 16px;

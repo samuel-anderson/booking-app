@@ -28,6 +28,7 @@ const ServiceCard = ({ service }) => {
 
   useEffect(() => {
     id && selectedService && setIsSelected(id === selectedService.id);
+
     id &&
       selectedAddOns &&
       setIsAddOn(selectedAddOns.some((addOn) => addOn.id === id));
@@ -35,9 +36,8 @@ const ServiceCard = ({ service }) => {
 
   const clickHandler = () => {
     if (isHovered) onClearHandler();
-    else if (!selectedService) {
-      dispatch(addService({ service }));
-    } else if (!isAddOn) dispatch(addAddOn({ addOn: service }));
+    else if (!selectedService) dispatch(addService({ service }));
+    else if (!isAddOn) dispatch(addAddOn({ addOn: service }));
     else dispatch(removeAddOn({ addOn: service }));
   };
 
@@ -57,25 +57,24 @@ const ServiceCard = ({ service }) => {
   // var isSelected = false;
   // if (id && selectedService) isSelected = id === selectedService.id;
 
-  const serviceClassName = isSelected
-    ? "isSelected"
-    : isAddOn
-    ? "isAddOn"
-    : "notSelected";
+  const serviceClassName = () => {
+    if (isSelected) return "isSelected";
+    else if (isAddOn) return "isAddOn";
+    else return "notSelected";
+  };
+
+  const getIsSelectedClass = () => {
+    if (isSelected) return "isSelected";
+    else return "notSelected";
+  };
 
   return (
-    <ServiceCardStyles onClick={clickHandler} className={serviceClassName}>
-      <div className={`service ${isSelected ? "isSelected" : "notSelected"}`}>
-        <p className={`title ${isSelected ? "isSelected" : "notSelected"}`}>
-          {title.toUpperCase()}
-        </p>
-        <p className={`duration ${isSelected ? "isSelected" : "notSelected"}`}>
-          {duration} min
-        </p>
+    <ServiceCardStyles onClick={clickHandler} className={serviceClassName()}>
+      <div className={`service ${getIsSelectedClass()}`}>
+        <p className={`title ${getIsSelectedClass()}`}>{title.toUpperCase()}</p>
+        <p className={`duration ${getIsSelectedClass()}`}>{duration} min</p>
       </div>
-      <p className={`price ${isSelected ? "isSelected" : "notSelected"}`}>
-        ${price}
-      </p>
+      <p className={`price ${getIsSelectedClass()}`}>${price}</p>
       {isSelected && (
         <IconBtnStyles
           onMouseEnter={handleMouseEnter}
