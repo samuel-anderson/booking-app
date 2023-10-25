@@ -1,15 +1,10 @@
 import { ServicesContainer } from "./service-list.styles";
 import ServiceCard from "../service-card/service-card.component";
-import { useSelector, useDispatch } from "react-redux";
-
-import { setStep } from "../../../../features/step/stepSlice";
-
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const ServiceList = () => {
   const services = useSelector((state) => state.services.services);
   const selectedService = useSelector((state) => state.cart.service);
-  const activeStep = useSelector((state) => state.step.activeStep);
   const selectedProfessional = useSelector((state) => state.cart.professional);
 
   const filterServiceByBarber = (barber) => {
@@ -33,12 +28,6 @@ const ServiceList = () => {
     selectedProfessional && selectedProfessional.services
       ? filterServiceByBarber(selectedProfessional)
       : services;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (activeStep !== 1) dispatch(setStep(1));
-  }, [dispatch, activeStep]);
 
   return (
     <>
