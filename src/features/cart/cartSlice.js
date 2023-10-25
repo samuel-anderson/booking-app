@@ -4,6 +4,8 @@ const CART_INITIAL_STATE = {
   professional: null,
   service: null,
   addOns: [],
+  date: null,
+  time: null,
 };
 
 const cartSlice = createSlice({
@@ -39,6 +41,9 @@ const cartSlice = createSlice({
     removeAddOns: (state) => {
       state.addOns = [];
     },
+    setDate: (state, action) => {
+      state.date = action.payload;
+    },
   },
 });
 
@@ -50,5 +55,6 @@ export const {
   addAddOn,
   removeAddOn,
   removeAddOns,
+  setDate,
 } = cartSlice.actions;
 export default cartSlice.reducer;

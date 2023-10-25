@@ -24,9 +24,6 @@ export const getStep = (step = STEPS.professional) => {
 };
 
 const getActiveLabelClass = (idx, activeStep) => {
-  console.log("idx", idx);
-  console.log("activeStep", activeStep);
-
   return idx <= activeStep ? "activeLabel" : "unActiveLabel";
 };
 

@@ -7,6 +7,7 @@ import {
 } from "../../components/main/content/stepper/stepper.component";
 import useNavigation from "../../hooks/useNavigation";
 import Calendar from "../../components/main/content/calendar/calendar.component";
+import { AvailabilityContainer } from "./availability.styles";
 
 const Availability = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
@@ -25,8 +26,10 @@ const Availability = () => {
   return (
     <>
       Choose a Time
-      <Calendar />
-      <AvailableTimeSlot />
+      <AvailabilityContainer>
+        <Calendar />
+        <AvailableTimeSlot />
+      </AvailabilityContainer>
     </>
   );
 };
