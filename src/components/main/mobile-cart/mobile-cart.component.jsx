@@ -29,6 +29,8 @@ const MobileCart = () => {
   const { showOrder, showAddOns, showDurationTotal } = useSMS();
   const { navigateAndUpdateStep } = useNavigation();
 
+  const activeStep = useSelector((state) => state.step.activeStep);
+
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
     setIsExpanded(false);
@@ -84,7 +86,7 @@ const MobileCart = () => {
             </div>
           )}
 
-          {!isClosed && (
+          {activeStep === 1 && !isClosed && (
             <Button
               clickHandler={navigate}
               text="Choose Time"

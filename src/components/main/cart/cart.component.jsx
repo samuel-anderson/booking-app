@@ -37,7 +37,7 @@ const Cart = () => {
         </div>
       )}
 
-      {cart.service && (
+      {activeStep === 1 && cart.service && (
         <BtnContainer>
           <Button
             clickHandler={navigate}

@@ -14,6 +14,21 @@ export const professionals = [
         link: "https://www.instagram.com/pana_papito/",
       },
     ],
+    schedule: {
+      sunday: null,
+      monday: null,
+      tuesday: [
+        { start: "7:00 AM", end: "9:00 AM" },
+        { start: "4:00 PM", end: "8:00 PM" },
+      ],
+      wednesday: [{ start: "4:00 PM", end: "8:00 PM" }],
+      thursday: null,
+      friday: [
+        { start: "12:00 PM", end: "3:00 PM" },
+        { start: "6:00 PM", end: "7:00 PM" },
+      ],
+      saturday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    },
     services: [
       {
         id: "haircut",

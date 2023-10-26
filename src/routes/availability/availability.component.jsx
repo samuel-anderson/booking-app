@@ -8,6 +8,7 @@ import {
 import useNavigation from "../../hooks/useNavigation";
 import Calendar from "../../components/main/content/calendar/calendar.component";
 import { AvailabilityContainer } from "./availability.styles";
+import moment from "moment";
 
 const Availability = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
@@ -23,12 +24,29 @@ const Availability = () => {
     if (activeStep !== 2) navigate();
   }, [navigateAndUpdateStep, activeStep]);
 
+  const selectedDate = useSelector((state) => state.cart.date);
+  const selectedProfessional = useSelector((state) => state.cart.professional);
+
+  const selectedDayofWeek = selectedDate
+    ? moment(selectedDate).format("dddd")
+    : moment().format("dddd");
+
+  const schedule = selectedProfessional
+    ? selectedProfessional.schedule[selectedDayofWeek.toLocaleLowerCase()]
+    : null;
+
   return (
     <>
       Choose a Time
       <AvailabilityContainer>
         <Calendar />
-        <AvailableTimeSlot />
+        {schedule && (
+          <AvailableTimeSlot
+            schedule={schedule}
+            selectedDayofWeek={selectedDayofWeek}
+          />
+        )}
+        {!schedule && <>NO SCHEDULE</>}
       </AvailabilityContainer>
     </>
   );
