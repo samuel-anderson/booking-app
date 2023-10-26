@@ -1,40 +1,37 @@
-// import { useSelector } from "react-redux";
-// import moment from "moment";
+import TimeSlot from "../time-slot/time-slot.styles";
+import moment from "moment";
 
 const AvailableTime = ({ schedule, selectedDayofWeek }) => {
-  // const selectedDate = useSelector((state) => state.cart.date);
-  // const selectedProfessional = useSelector((state) => state.cart.professional);
+  const getTimeSlotClass = () => {
+    return "available";
+  };
 
-  // const selectedDayofWeek = selectedDate
-  //   ? moment(selectedDate).format("dddd")
-  //   : moment().format("dddd");
+  const generateTimeSlots = (startTime, endTime) => {
+    const slots = [];
+    let currentTime = moment(startTime, "h:mm A");
+    const endTimeMoment = moment(endTime, "h:mm A");
 
-  // const schedule =
-  //   selectedProfessional.schedule[selectedDayofWeek.toLocaleLowerCase()];
+    while (currentTime.isSameOrBefore(endTimeMoment)) {
+      slots.push(currentTime.format("h:mm A"));
+      currentTime.add(15, "minutes");
+    }
+
+    return slots;
+  };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div>
-        {selectedDayofWeek}
-        {schedule &&
-          schedule.map((day, idx) => {
-            return (
-              <div key={idx}>
-                {day.start} - {day.end}
-              </div>
-            );
-          })}
-      </div>
-
-      <div style={{ display: "flex" }}>
-        {[1, 2, 3, 4, 5, 6].map((_, idx) => {
-          return (
-            <div key={idx} style={{ padding: 10 }}>
-              Time
-            </div>
-          );
-        })}
-      </div>
+    <div
+      style={{ display: "flex", flexWrap: "wrap", alignContent: "flex-start" }}
+    >
+      {schedule.map((day, idx) => {
+        return generateTimeSlots(day.start, day.end).map((slot, idx) => (
+          <TimeSlot
+            key={idx + 300}
+            slot={slot}
+            className={getTimeSlotClass()}
+          />
+        ));
+      })}
     </div>
   );
 };
