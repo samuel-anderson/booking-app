@@ -13,7 +13,9 @@ const Calendar = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <StaticDatePicker
         value={selectedDate ? selectedDate : moment()}
-        onChange={(date) => dispatch(setServiceDate(moment(date)))}
+        onChange={(date) =>
+          dispatch(setServiceDate(moment(date).format("MM/DD/YYYY")))
+        }
       />
     </LocalizationProvider>
   );

@@ -1,9 +1,15 @@
 import TimeSlot from "../time-slot/time-slot.component";
 import moment from "moment";
 import { AvailableTimeSlotContainer } from "./available-time-slot.styles";
+import { useSelector } from "react-redux";
 
 const AvailableTime = ({ schedule }) => {
-  const getTimeSlotClass = () => {
+  const estimatedDuration = useSelector(
+    (state) => state.cart.estimatedDuration
+  );
+  const getTimeSlotClass = (slot) => {
+    // console.log(slot);
+    // console.log(estimatedDuration);
     return "notSelected";
   };
 
@@ -24,7 +30,7 @@ const AvailableTime = ({ schedule }) => {
     <AvailableTimeSlotContainer>
       {schedule.map((day) => {
         return generateTimeSlots(day.start, day.end).map((slot, idx) => (
-          <TimeSlot key={idx} slot={slot} className={getTimeSlotClass()} />
+          <TimeSlot key={idx} slot={slot} className={getTimeSlotClass(slot)} />
         ));
       })}
     </AvailableTimeSlotContainer>
