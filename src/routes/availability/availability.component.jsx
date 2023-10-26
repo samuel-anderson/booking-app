@@ -24,7 +24,7 @@ const Availability = () => {
     if (activeStep !== 2) navigate();
   }, [navigateAndUpdateStep, activeStep]);
 
-  const selectedDate = useSelector((state) => state.cart.date);
+  const selectedDate = useSelector((state) => state.cart.serviceDate);
   const selectedProfessional = useSelector((state) => state.cart.professional);
 
   const selectedDayofWeek = selectedDate

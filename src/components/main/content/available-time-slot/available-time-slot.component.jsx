@@ -4,7 +4,7 @@ import { AvailableTimeSlotContainer } from "./available-time-slot.styles";
 
 const AvailableTime = ({ schedule }) => {
   const getTimeSlotClass = () => {
-    return "available";
+    return "notSelected";
   };
 
   const generateTimeSlots = (startTime, endTime) => {

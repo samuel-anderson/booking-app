@@ -4,4 +4,5 @@ export const AvailableTimeSlotContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  gap: 10px;
 `;

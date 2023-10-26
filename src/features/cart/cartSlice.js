@@ -4,8 +4,9 @@ const CART_INITIAL_STATE = {
   professional: null,
   service: null,
   addOns: [],
-  date: null,
-  time: null,
+  serviceDate: null,
+  startTime: null,
+  estimatedDuration: null,
 };
 
 const cartSlice = createSlice({
@@ -16,6 +17,9 @@ const cartSlice = createSlice({
       state.professional = null;
       state.service = null;
       state.addOns = [];
+      state.serviceDate = null;
+      state.startTime = null;
+      state.estimatedDuration = null;
     },
     setProfessional: (state, action) => {
       state.professional = action.payload.professional;
@@ -41,8 +45,14 @@ const cartSlice = createSlice({
     removeAddOns: (state) => {
       state.addOns = [];
     },
-    setDate: (state, action) => {
-      state.date = action.payload;
+    setServiceDate: (state, action) => {
+      state.serviceDate = action.payload;
+    },
+    setEstimatedDuration: (state, action) => {
+      state.estimatedDuration = action.payload;
+    },
+    setStartTime: (state, action) => {
+      state.startTime = action.payload;
     },
   },
 });
@@ -55,6 +65,8 @@ export const {
   addAddOn,
   removeAddOn,
   removeAddOns,
-  setDate,
+  setServiceDate,
+  setEstimatedDuration,
+  setStartTime,
 } = cartSlice.actions;
 export default cartSlice.reducer;
