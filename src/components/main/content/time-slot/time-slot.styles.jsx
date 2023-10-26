@@ -1,5 +1,7 @@
-const TimeSlot = ({ slot }) => {
-  return <div style={{ padding: 10, height: 50, width: 100 }}>{slot}</div>;
-};
+import { styled } from "styled-components";
 
-export default TimeSlot;
+export const TimeSlotStyles = styled.div`
+  padding: 10px;
+  height: 50px;
+  width: 100px;
+`;

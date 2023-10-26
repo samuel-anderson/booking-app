@@ -1,7 +1,8 @@
-import TimeSlot from "../time-slot/time-slot.styles";
+import TimeSlot from "../time-slot/time-slot.component";
 import moment from "moment";
+import { AvailableTimeSlotContainer } from "./available-time-slot.styles";
 
-const AvailableTime = ({ schedule, selectedDayofWeek }) => {
+const AvailableTime = ({ schedule }) => {
   const getTimeSlotClass = () => {
     return "available";
   };
@@ -20,19 +21,13 @@ const AvailableTime = ({ schedule, selectedDayofWeek }) => {
   };
 
   return (
-    <div
-      style={{ display: "flex", flexWrap: "wrap", alignContent: "flex-start" }}
-    >
-      {schedule.map((day, idx) => {
+    <AvailableTimeSlotContainer>
+      {schedule.map((day) => {
         return generateTimeSlots(day.start, day.end).map((slot, idx) => (
-          <TimeSlot
-            key={idx + 300}
-            slot={slot}
-            className={getTimeSlotClass()}
-          />
+          <TimeSlot key={idx} slot={slot} className={getTimeSlotClass()} />
         ));
       })}
-    </div>
+    </AvailableTimeSlotContainer>
   );
 };
 

@@ -31,9 +31,10 @@ const Availability = () => {
     ? moment(selectedDate).format("dddd")
     : moment().format("dddd");
 
-  const schedule = selectedProfessional
-    ? selectedProfessional.schedule[selectedDayofWeek.toLocaleLowerCase()]
-    : null;
+  const schedule =
+    selectedProfessional && selectedProfessional.schedule
+      ? selectedProfessional.schedule[selectedDayofWeek.toLocaleLowerCase()]
+      : null;
 
   return (
     <>

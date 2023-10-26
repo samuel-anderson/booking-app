@@ -5,7 +5,6 @@ const selectAddOns = (state) => state.cart.addOns;
 
 export const selectAddOnTotal = createSelector(selectAddOns, (addOns) => {
   const total = addOns.reduce((total, addOn) => total + addOn.price, 0);
-  console.log(total);
   return total;
 });
 
