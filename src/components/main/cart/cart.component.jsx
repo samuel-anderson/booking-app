@@ -8,6 +8,8 @@ import useNavigation from "../../../hooks/useNavigation";
 import { getStep, STEPS } from "../content/stepper/stepper.component";
 import { selectDurationTotal } from "../../../features/cart/cartSelector";
 import { setEstimatedDuration } from "../../../features/cart/cartSlice";
+import { updateDocument } from "../../../utils/firebase";
+import { appointmentObjectToAdd } from "../../../utils/firebase";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,32 @@ const Cart = () => {
   };
 
   const clickFinishHandler = () => {
-    console.log(cart);
+    //clean up forming the appointment info obj
+    //export more functions
+    //create form, with input and labels
+    //onSubmit****
+    //test exisiting apointment logic
+    const {
+      professional,
+      serviceDate,
+      startTime,
+      estimatedDuration,
+      service,
+      addOns,
+    } = cart;
+    const updateObj = appointmentObjectToAdd(professional.id, serviceDate, {
+      clientName: "Johnny Joe",
+      clientPhoneNumber: "+9998453334",
+      service,
+      addOns,
+      serviceDate,
+      startTime,
+      estimatedDuration,
+    });
+
+    console.log(updateObj);
+
+    updateDocument("barber_shop", "appointments", updateObj);
   };
   const navigate = () => {
     const { route, step } = getStep(STEPS.availability);

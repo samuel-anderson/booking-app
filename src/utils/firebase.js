@@ -6,12 +6,14 @@ import {
   collection,
   query,
   getDocs,
-  //updateDoc,
+  updateDoc,
   deleteDoc,
-  //addDoc,
+  arrayUnion,
   doc,
   writeBatch,
 } from "firebase/firestore";
+
+import moment from "moment";
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -52,6 +54,29 @@ export const addDocument = async (collectionKey, jsonObjectsToAdd) => {
   });
 
   await batch.commit();
+};
+
+export const updateDocument = async (collectionName, documentId, dataToAdd) => {
+  try {
+    const documentRef = doc(db, collectionName, documentId);
+    await updateDoc(documentRef, dataToAdd);
+  } catch (error) {
+    console.error("Error creating document:", error);
+  }
+};
+
+export const appointmentObjectToAdd = (
+  barberId,
+  appointmentDate,
+  appointmentInfo
+) => {
+  const aptDate = moment(appointmentDate).format("MM_DD_YYYY");
+
+  const objectUpdate = {};
+
+  objectUpdate[`items.${barberId}.${aptDate}`] = arrayUnion(appointmentInfo);
+
+  return objectUpdate;
 };
 
 export const deleteDocument = async (collectionName, id) => {
