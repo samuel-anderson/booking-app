@@ -5,13 +5,13 @@ import { Label } from "./stepper.styles";
 import useNavigation from "../../../../hooks/useNavigation";
 import { emptyCart } from "../../../../features/cart/cartSlice";
 
-const steps = ["Professional", "Service", "Time", "Done"];
+const steps = ["Professional", "Service", "Time", "Finish"];
 
 export const STEPS = {
   professional: "professional",
   service: "service",
   availability: "availability",
-  done: "done",
+  finish: "finish",
 };
 
 export const getStep = (step = STEPS.professional) => {
@@ -19,7 +19,7 @@ export const getStep = (step = STEPS.professional) => {
     [STEPS.professional]: { step: 0, route: "/" },
     [STEPS.service]: { step: 1, route: "/services" },
     [STEPS.availability]: { step: 2, route: "/availability" },
-    [STEPS.done]: { step: 3, route: "/done" },
+    [STEPS.finish]: { step: 3, route: "/finish" },
   }[step];
 };
 

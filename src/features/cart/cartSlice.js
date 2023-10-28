@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
 
 const CART_INITIAL_STATE = {
   professional: null,
   service: null,
   addOns: [],
-  serviceDate: null,
+  serviceDate: moment().format("MM/DD/YYYY"),
   startTime: null,
   estimatedDuration: null,
 };
@@ -13,14 +14,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: CART_INITIAL_STATE,
   reducers: {
-    emptyCart: (state) => {
-      state.professional = null;
-      state.service = null;
-      state.addOns = [];
-      state.serviceDate = null;
-      state.startTime = null;
-      state.estimatedDuration = null;
-    },
+    emptyCart: (state) => {},
     setProfessional: (state, action) => {
       state.professional = action.payload.professional;
     },

@@ -1,43 +1,10 @@
-import {
-  selectOrderTotal,
-  selectDurationTotal,
-} from "../features/cart/cartSelector";
-
 import { useSelector } from "react-redux";
 import { sendSMS } from "../utils/firebase";
+import { appointmentObjectToAdd } from "../utils/firebase";
+import { updateDocument } from "../utils/firebase";
 
 const useSMS = () => {
   const cart = useSelector((state) => state.cart);
-  const orderTotal = useSelector(selectOrderTotal);
-  const durationTotal = useSelector(selectDurationTotal);
-
-  const showOrderTotal = () => {
-    return orderTotal !== 0 ? `$${orderTotal}` : "";
-  };
-
-  const showDurationTotal = () => {
-    if (durationTotal === 0) return "";
-
-    const hours = Math.floor(durationTotal / 60);
-    const minutes = durationTotal % 60;
-    const hoursTxt = hours === 0 ? "" : `${hours} hr.`;
-    const minTxt = minutes === 0 ? "" : `${minutes} min.`;
-
-    return `Est. Time: ${hoursTxt} ${minTxt}`;
-  };
-
-  const showProfessional = () => {
-    return cart.professional ? cart.professional.name : "Any Professional";
-  };
-
-  const showOrder = () => {
-    return (
-      <div className="order-total">
-        <span>{showProfessional()}</span>
-        <span>{showOrderTotal()}</span>
-      </div>
-    );
-  };
 
   const showAddOns = () => {
     if (cart.addOns.length === 0) return "";
@@ -46,28 +13,58 @@ const useSMS = () => {
     else return ` with ${cart.addOns.length} addons`;
   };
 
-  const submitBooking = () => {
-    if (cart.professional) {
-      sendSMS({
-        clientName: "TEST CLIENT",
-        professionalPhoneNumber: cart.professional.phoneNumber
-          ? cart.professional.phoneNumber
-          : "+18583543893",
-        date: "TODAY",
-        time: "5:00pm",
-        service: cart.service.title + showAddOns(),
-        clientPhoneNumber: "7609893444",
-      });
+  const insertBooking = (
+    clientFirstName,
+    clientLastName,
+    clientPhoneNumber
+  ) => {
+    //clean up forming the appointment info obj
+    //export more functions
+    //create form, with input and labels
+    //onSubmit****
+    //test exisiting apointment logic
+
+    const updateObj = appointmentObjectToAdd(
+      cart.professional.id,
+      cart.serviceDate,
+      {
+        clientName: `${clientFirstName} ${clientLastName}`,
+        clientPhoneNumber: clientPhoneNumber,
+        service: cart.service,
+        addOns: cart.addOns,
+        serviceDate: cart.serviceDate,
+        startTime: cart.startTime,
+        estimatedDuration: cart.estimatedDuration,
+      }
+    );
+
+    updateDocument("barber_shop", "appointments", updateObj);
+  };
+
+  const submitBooking = (
+    clientFirstName,
+    clientLastName,
+    clientPhoneNumber
+  ) => {
+    try {
+      insertBooking(clientFirstName, clientLastName, clientPhoneNumber);
+      if (cart.professional) {
+        sendSMS({
+          clientName: `${clientFirstName} ${clientLastName}`,
+          professionalPhoneNumber: cart.professional.phoneNumber,
+          date: cart.serviceDate,
+          time: cart.startTime,
+          service: cart.service.title + showAddOns(),
+          clientPhoneNumber: clientPhoneNumber,
+        });
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
   return {
     submitBooking,
-    showOrder,
-    showAddOns,
-    showProfessional,
-    showOrderTotal,
-    showDurationTotal,
   };
 };
 

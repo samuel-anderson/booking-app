@@ -3,13 +3,13 @@ import { CartStyles, BtnContainer } from "./cart.styles";
 import CartSkeleton from "../cart-skeleton/cart-skeleton.component";
 import Button from "../content/button/button.component";
 
-import useSMS from "../../../hooks/useSMS";
+import useCart from "../../../hooks/useCart";
 import useNavigation from "../../../hooks/useNavigation";
 import { getStep, STEPS } from "../content/stepper/stepper.component";
 import { selectDurationTotal } from "../../../features/cart/cartSelector";
 import { setEstimatedDuration } from "../../../features/cart/cartSlice";
-import { updateDocument } from "../../../utils/firebase";
-import { appointmentObjectToAdd } from "../../../utils/firebase";
+// import { updateDocument } from "../../../utils/firebase";
+// import { appointmentObjectToAdd } from "../../../utils/firebase";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,55 +17,48 @@ const Cart = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
   const durationTotal = useSelector(selectDurationTotal);
 
-  const { showOrder, showAddOns, showOrderTotal, showDurationTotal } = useSMS();
+  const {
+    showOrder,
+    showAddOns,
+    showOrderTotal,
+    showDurationTotal,
+    showStartTime,
+  } = useCart();
 
   const { navigateAndUpdateStep } = useNavigation();
 
-  const clickHandler = () => {
-    dispatch(setEstimatedDuration(durationTotal));
-    navigate();
-  };
-
-  const clickFinishHandler = () => {
-    //clean up forming the appointment info obj
-    //export more functions
-    //create form, with input and labels
-    //onSubmit****
-    //test exisiting apointment logic
-    const {
-      professional,
-      serviceDate,
-      startTime,
-      estimatedDuration,
-      service,
-      addOns,
-    } = cart;
-    const updateObj = appointmentObjectToAdd(professional.id, serviceDate, {
-      clientName: "Johnny Joe",
-      clientPhoneNumber: "+9998453334",
-      service,
-      addOns,
-      serviceDate,
-      startTime,
-      estimatedDuration,
-    });
-
-    console.log(updateObj);
-
-    updateDocument("barber_shop", "appointments", updateObj);
-  };
-  const navigate = () => {
-    const { route, step } = getStep(STEPS.availability);
+  const navigate = (route, step) => {
     navigateAndUpdateStep(route, step);
+  };
+
+  const navigateToTimeStep = () => {
+    dispatch(setEstimatedDuration(durationTotal));
+
+    const { route, step } = getStep(STEPS.availability);
+    navigate(route, step);
+  };
+
+  const navigateToFinishStep = () => {
+    const { route, step } = getStep(STEPS.finish);
+    navigate(route, step);
   };
 
   return (
     <CartStyles>
-      <div className="order-text">
-        Your Order <span className="order-duration">{showDurationTotal()}</span>
-      </div>
+      {activeStep === 0 || (
+        <div className="order-text">
+          Your Order{" "}
+          <span className="order-duration">{showDurationTotal()}</span>
+          <span className="order-duration">{showStartTime()}</span>
+        </div>
+      )}
+
       {activeStep === 0 && <CartSkeleton />}
-      {activeStep === 1 && showOrder()}
+
+      {/* ***************** ORDER INFO COMPONENT *************** */}
+      {/* ***************** ORDER INFO COMPONENT *************** */}
+
+      {cart.professional && showOrder()}
 
       {cart.service && (
         <div className="order-info">
@@ -77,23 +70,37 @@ const Cart = () => {
         </div>
       )}
 
+      {cart.startTime && (
+        <div className="order-info">
+          <div></div>
+        </div>
+      )}
+      {/* ***************** ORDER INFO COMPONENT *************** */}
+      {/* ***************** ORDER INFO COMPONENT *************** */}
+
       {activeStep === 1 && cart.service && (
         <BtnContainer>
           <Button
-            clickHandler={clickHandler}
-            text="Choose Time"
-            classStyle="default"
-          />
+            buttonOptions={{
+              onClick: navigateToTimeStep,
+              className: "default",
+            }}
+          >
+            Choose Time
+          </Button>
         </BtnContainer>
       )}
 
       {activeStep === 2 && cart.startTime && (
         <BtnContainer>
           <Button
-            clickHandler={clickFinishHandler}
-            text="Finish"
-            classStyle="default"
-          />
+            buttonOptions={{
+              onClick: navigateToFinishStep,
+              className: "default",
+            }}
+          >
+            Finish
+          </Button>
         </BtnContainer>
       )}
     </CartStyles>

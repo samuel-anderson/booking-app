@@ -2,7 +2,7 @@ import { BottomSheet } from "./mobile-car.styles";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Button from "../content/button/button.component";
-import useSMS from "../../../hooks/useSMS";
+import useCart from "../../../hooks/useCart";
 import useNavigation from "../../../hooks/useNavigation";
 import { selectAddOnTotal } from "../../../features/cart/cartSelector";
 import { getStep, STEPS } from "../content/stepper/stepper.component";
@@ -26,7 +26,7 @@ const MobileCart = () => {
   const cart = useSelector((state) => state.cart);
   const addOnTotal = useSelector(selectAddOnTotal);
 
-  const { showOrder, showAddOns, showDurationTotal } = useSMS();
+  const { showOrder, showAddOns, showDurationTotal } = useCart();
   const { navigateAndUpdateStep } = useNavigation();
 
   const activeStep = useSelector((state) => state.step.activeStep);
@@ -88,10 +88,10 @@ const MobileCart = () => {
 
           {activeStep === 1 && !isClosed && (
             <Button
-              clickHandler={navigate}
-              text="Choose Time"
-              classStyle="default"
-            />
+              buttonOptions={{ clickHandler: navigate, className: "default" }}
+            >
+              Choose Time
+            </Button>
           )}
         </div>
       </BottomSheet>

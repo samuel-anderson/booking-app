@@ -3,7 +3,7 @@ import Professional from "../../../routes/professional/professional.component";
 import Service from "../../../routes/service/service.component";
 import Availability from "../../../routes/availability/availability.component";
 import Step from "../../../routes/step/step.component";
-import Done from "../../../routes/done/done.component";
+import Complete from "../../../routes/complete/complete.component";
 import { ContentStyles } from "./content.styles";
 
 const Content = () => {
@@ -14,7 +14,7 @@ const Content = () => {
           <Route index element={<Professional />} />
           <Route path="/services" element={<Service />} />
           <Route path="/availability" element={<Availability />} />
-          <Route path="/done" element={<Done />} />
+          <Route path="/finish" element={<Complete />} />
         </Route>
       </Routes>
     </ContentStyles>
