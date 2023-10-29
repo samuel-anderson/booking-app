@@ -1,6 +1,6 @@
 import { BottomSheet } from "./mobile-car.styles";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "../content/button/button.component";
 import useCart from "../../../hooks/useCart";
 import useNavigation from "../../../hooks/useNavigation";
@@ -11,6 +11,9 @@ import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
+import { selectDurationTotal } from "../../../features/cart/cartSelector";
+import { setEstimatedDuration } from "../../../features/cart/cartSlice";
+
 const styles = {
   grayIcon: {
     color: "gray",
@@ -20,16 +23,18 @@ const styles = {
 };
 
 const MobileCart = () => {
+  const dispatch = useDispatch();
   const [isClosed, setIsClosed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const cart = useSelector((state) => state.cart);
   const addOnTotal = useSelector(selectAddOnTotal);
 
-  const { showOrder, showAddOns, showDurationTotal } = useCart();
+  const { showOrder, showAddOns, showDurationTotal, showStartTime } = useCart();
   const { navigateAndUpdateStep } = useNavigation();
 
   const activeStep = useSelector((state) => state.step.activeStep);
+  const durationTotal = useSelector(selectDurationTotal);
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
@@ -41,8 +46,19 @@ const MobileCart = () => {
     else if (isExpanded) return "expanded";
   };
 
-  const navigate = () => {
+  const navigateToTimeStep = () => {
+    dispatch(setEstimatedDuration(durationTotal));
+
     const { route, step } = getStep(STEPS.availability);
+    navigate(route, step);
+  };
+
+  const navigateToFinishStep = () => {
+    const { route, step } = getStep(STEPS.finish);
+    navigate(route, step);
+  };
+
+  const navigate = (route, step) => {
     navigateAndUpdateStep(route, step);
   };
   return (
@@ -57,6 +73,7 @@ const MobileCart = () => {
             <div className="order-text">
               Your order{" "}
               <span className="order-duration">{showDurationTotal()}</span>
+              <span className="order-duration">{showStartTime()}</span>
             </div>
 
             <IconButton onClick={() => setIsClosed(!isClosed)}>
@@ -88,9 +105,23 @@ const MobileCart = () => {
 
           {activeStep === 1 && !isClosed && (
             <Button
-              buttonOptions={{ clickHandler: navigate, className: "default" }}
+              buttonOptions={{
+                onClick: navigateToTimeStep,
+                className: "default",
+              }}
             >
               Choose Time
+            </Button>
+          )}
+
+          {activeStep === 2 && cart.startTime && (
+            <Button
+              buttonOptions={{
+                onClick: navigateToFinishStep,
+                className: "default",
+              }}
+            >
+              Finish
             </Button>
           )}
         </div>
