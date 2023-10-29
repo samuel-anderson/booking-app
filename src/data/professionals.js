@@ -5,6 +5,17 @@ export const professionals = [
     phoneNumber: "+17602774923",
   },
   {
+    id: "kari_anderson",
+    name: "Kari Anderson",
+    phoneNumber: "+18583543893",
+    schedule: {
+      tuesday: [
+        { start: "7:00 AM", end: "9:00 AM" },
+        { start: "4:00 PM", end: "8:00 PM" },
+      ],
+    },
+  },
+  {
     id: "samuel_anderson",
     name: "Samuel Anderson",
     phoneNumber: "+17602774923",
