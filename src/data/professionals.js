@@ -2,7 +2,14 @@ export const professionals = [
   {
     id: "george_mena",
     name: "George Mena",
-    phoneNumber: "+17602774923",
+    phoneNumber: "+19097306555",
+    sunday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    monday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    tuesday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    wednesday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    thursday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    friday: [{ start: "8:00 AM", end: "8:00 PM" }],
+    saturday: [{ start: "8:00 AM", end: "8:00 PM" }],
   },
   {
     id: "kari_anderson",
@@ -10,6 +17,14 @@ export const professionals = [
     phoneNumber: "+18583543893",
     schedule: {
       tuesday: [
+        { start: "7:00 AM", end: "9:00 AM" },
+        { start: "4:00 PM", end: "8:00 PM" },
+      ],
+      wednesday: [
+        { start: "7:00 AM", end: "9:00 AM" },
+        { start: "4:00 PM", end: "8:00 PM" },
+      ],
+      thursday: [
         { start: "7:00 AM", end: "9:00 AM" },
         { start: "4:00 PM", end: "8:00 PM" },
       ],

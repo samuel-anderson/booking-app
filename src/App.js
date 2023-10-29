@@ -3,11 +3,11 @@ import Container from "./components/container/container.component";
 import { fetchShopDataStart } from "./features/shop/shopSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-// import useFirebase from "./hooks/useFirebase";
+import useFirebase from "./hooks/useFirebase";
 
 function App() {
   const dispatch = useDispatch();
-  // useFirebase();
+  useFirebase();
 
   useEffect(() => {
     dispatch(fetchShopDataStart());
