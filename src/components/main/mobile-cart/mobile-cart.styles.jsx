@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const BottomSheet = styled.div`
   .bottom-sheet {
+    padding: 10px;
     position: fixed;
     bottom: 0;
     height: 0;
