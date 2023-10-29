@@ -70,7 +70,7 @@ export const appointmentObjectToAdd = (
   appointmentDate,
   appointmentInfo
 ) => {
-  const aptDate = moment(appointmentDate).format("MM_DD_YYYY");
+  const aptDate = moment(appointmentDate).format("YYYY_MM_DD");
 
   const objectUpdate = {};
 

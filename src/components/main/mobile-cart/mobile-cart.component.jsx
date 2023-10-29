@@ -2,7 +2,7 @@ import { BottomSheet } from "./mobile-car.styles";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../content/button/button.component";
-import useCart from "../../../hooks/useCart";
+// import useCart from "../../../hooks/useCart";
 import useNavigation from "../../../hooks/useNavigation";
 import { selectAddOnTotal } from "../../../features/cart/cartSelector";
 import { getStep, STEPS } from "../content/stepper/stepper.component";
@@ -11,8 +11,19 @@ import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-import { selectDurationTotal } from "../../../features/cart/cartSelector";
+import {
+  selectDurationTotal,
+  selectOrderTotal,
+} from "../../../features/cart/cartSelector";
 import { setEstimatedDuration } from "../../../features/cart/cartSlice";
+
+import {
+  showProfessional,
+  showOrderTotal,
+  showDurationTotal,
+  showAddOnsMobile,
+  showStartTime,
+} from "../../../utils/cart";
 
 const styles = {
   grayIcon: {
@@ -30,11 +41,12 @@ const MobileCart = () => {
   const cart = useSelector((state) => state.cart);
   const addOnTotal = useSelector(selectAddOnTotal);
 
-  const { showOrder, showAddOns, showDurationTotal, showStartTime } = useCart();
+  // const { showOrder, showAddOns, showDurationTotal, showStartTime } = useCart();
   const { navigateAndUpdateStep } = useNavigation();
 
   const activeStep = useSelector((state) => state.step.activeStep);
   const durationTotal = useSelector(selectDurationTotal);
+  const orderTotal = useSelector(selectOrderTotal);
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
@@ -72,8 +84,12 @@ const MobileCart = () => {
           <div className="order">
             <div className="order-text">
               Your order{" "}
-              <span className="order-duration">{showDurationTotal()}</span>
-              <span className="order-duration">{showStartTime()}</span>
+              <span className="order-duration">
+                {showDurationTotal(durationTotal)}
+              </span>
+              <span className="order-duration">
+                {showStartTime(cart.startTime)}
+              </span>
             </div>
 
             <IconButton onClick={() => setIsClosed(!isClosed)}>
@@ -87,7 +103,10 @@ const MobileCart = () => {
 
           {!isClosed && (
             <div className="content">
-              {showOrder()}
+              <div className="order-total">
+                <span>{showProfessional(cart.professional)}</span>
+                <span>{showOrderTotal(orderTotal)}</span>
+              </div>
               {cart.service && (
                 <div className="order-info">
                   <div>{cart.service.title.toUpperCase()}</div>
@@ -96,7 +115,9 @@ const MobileCart = () => {
               )}
               {cart.addOns.length > 0 && (
                 <div className="order-info">
-                  <div>{showAddOns().replace("with", "+")}</div>
+                  <div>
+                    {showAddOnsMobile(cart.addOns).replace("with", "+")}
+                  </div>
                   <div>${addOnTotal}</div>
                 </div>
               )}

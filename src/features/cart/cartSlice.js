@@ -5,7 +5,7 @@ const CART_INITIAL_STATE = {
   professional: null,
   service: null,
   addOns: [],
-  serviceDate: moment().format("MM/DD/YYYY"),
+  serviceDate: moment().format("YYYY-MM-DD"),
   startTime: null,
   estimatedDuration: null,
 };
@@ -14,7 +14,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: CART_INITIAL_STATE,
   reducers: {
-    emptyCart: (state) => {},
+    emptyCart: (_) => CART_INITIAL_STATE,
     setProfessional: (state, action) => {
       state.professional = action.payload.professional;
     },
