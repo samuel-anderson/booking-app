@@ -3,8 +3,13 @@
 // import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
 import { useState } from "react";
-import { CalendarContainer, DateContainer, Date } from "./calendar.styles";
-import { useDispatch } from "react-redux";
+import {
+  CalendarContainer,
+  DateContainer,
+  Date,
+  DateLabel,
+} from "./calendar.styles";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setServiceDate,
   setStartTime,
@@ -16,6 +21,12 @@ const Calendar = () => {
     moment().format("MMMM Do, YYYY")
   );
 
+  const serviceDate = useSelector((state) => state.cart.serviceDate);
+
+  const getClass = (date) => {
+    if (moment(serviceDate).isSame(date)) return "selected";
+    else return "full";
+  };
   const generateNext14Days = () => {
     const dates = [];
     const currentDate = moment(); // Get the current date
@@ -47,8 +58,8 @@ const Calendar = () => {
                 dispatch(setStartTime(null));
               }}
             >
-              <Date>{item.date}</Date>
-              <div style={{ textAlign: "center" }}>{item.day}</div>
+              <Date className={getClass(item.value)}>{item.date}</Date>
+              <DateLabel>{item.day}</DateLabel>
             </div>
           );
         })}
