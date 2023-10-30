@@ -45,7 +45,8 @@ export const Date = styled.div`
     box-sizing: border-box;
   }
 
-  &.full {
+  &.notAvailable {
+    cursor: not-allowed;
     color: rgba(60, 60, 67, 0.6);
     background: repeating-linear-gradient(
       -45deg,

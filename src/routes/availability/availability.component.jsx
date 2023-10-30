@@ -37,10 +37,21 @@ const Availability = () => {
       ? selectedProfessional.schedule[DAYSOFWEEK[selectedDayofWeek]]
       : null;
 
+  const checkProfessionalSchedule = (date) => {
+    const day = moment(date).day();
+
+    const hasSchedule =
+      selectedProfessional && selectedProfessional.schedule
+        ? selectedProfessional.schedule[DAYSOFWEEK[day]]
+        : null;
+
+    return hasSchedule;
+  };
+
   return (
     <>
       <AvailabilityContainer>
-        <Calendar />
+        <Calendar clickHandler={checkProfessionalSchedule} />
         {schedule && (
           <AvailableTimeSlot
             schedule={schedule}

@@ -15,7 +15,7 @@ import {
   setStartTime,
 } from "../../../../features/cart/cartSlice";
 
-const Calendar = () => {
+const Calendar = ({ clickHandler }) => {
   const dispatch = useDispatch();
   const [displayDate, setDisplayedDate] = useState(
     moment().format("MMMM Do, YYYY")
@@ -24,6 +24,8 @@ const Calendar = () => {
   const serviceDate = useSelector((state) => state.cart.serviceDate);
 
   const getClass = (date) => {
+    if (!clickHandler(date)) return "notAvailable";
+
     if (moment(serviceDate).isSame(date)) return "selected";
     else return "notSelected";
   };
@@ -53,9 +55,11 @@ const Calendar = () => {
             <div
               key={idx}
               onClick={() => {
-                setDisplayedDate(item.displayDate);
-                dispatch(setServiceDate(item.value));
-                dispatch(setStartTime(null));
+                if (getClass(item.value) !== "notAvailable") {
+                  setDisplayedDate(item.displayDate);
+                  dispatch(setServiceDate(item.value));
+                  dispatch(setStartTime(null));
+                }
               }}
             >
               <Date className={getClass(item.value)}>{item.date}</Date>
