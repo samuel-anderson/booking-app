@@ -39,7 +39,6 @@ const Availability = () => {
 
   return (
     <>
-      Choose a Time
       <AvailabilityContainer>
         <Calendar />
         {schedule && (

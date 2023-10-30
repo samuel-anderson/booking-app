@@ -25,7 +25,7 @@ const Calendar = () => {
 
   const getClass = (date) => {
     if (moment(serviceDate).isSame(date)) return "selected";
-    else return "full";
+    else return "notSelected";
   };
   const generateNext14Days = () => {
     const dates = [];
@@ -46,7 +46,7 @@ const Calendar = () => {
 
   return (
     <CalendarContainer>
-      <div>{displayDate}</div>
+      <div style={{ marginBottom: 10, marginTop: 10 }}>{displayDate}</div>
       <DateContainer>
         {generateNext14Days().map((item, idx) => {
           return (

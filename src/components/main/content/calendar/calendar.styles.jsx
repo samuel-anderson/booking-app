@@ -4,6 +4,7 @@ export const CalendarContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 
 export const DateContainer = styled.div`
@@ -26,6 +27,12 @@ export const Date = styled.div`
   cursor: pointer;
   color: rgb(255, 255, 255);
   margin-bottom: 2px;
+
+  &.notSelected {
+    background-color: rgb(220, 220, 220);
+
+    color: rgba(60, 60, 67, 0.5);
+  }
 
   &.selected::before {
     content: "";
