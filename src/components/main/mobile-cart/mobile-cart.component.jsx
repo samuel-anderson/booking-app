@@ -41,7 +41,6 @@ const MobileCart = () => {
   }, [cart.service]);
 
   const cartVisibility = () => {
-    console.log("test");
     if (isClosed) return "closed";
     else return "";
   };
