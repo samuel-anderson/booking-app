@@ -25,7 +25,7 @@ export const ServiceCardStyles = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 166px;
+  width: 140px;
   min-height: 124px;
   cursor: pointer;
   padding: 20px 16px;
