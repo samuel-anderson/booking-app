@@ -26,7 +26,6 @@ export const styles = {
 const MobileCart = () => {
   const dispatch = useDispatch();
   const [isClosed, setIsClosed] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const cart = useSelector((state) => state.cart);
   const addOnTotal = useSelector(selectAddOnTotal);
@@ -39,12 +38,12 @@ const MobileCart = () => {
 
   useEffect(() => {
     if (!cart.service) setIsClosed(false);
-    setIsExpanded(false);
   }, [cart.service]);
 
   const cartVisibility = () => {
+    console.log("test");
     if (isClosed) return "closed";
-    else if (isExpanded) return "expanded";
+    else return "";
   };
 
   const navigateToTimeStep = () => {

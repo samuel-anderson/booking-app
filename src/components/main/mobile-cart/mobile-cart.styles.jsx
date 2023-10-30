@@ -4,8 +4,8 @@ export const BottomSheet = styled.div`
   .bottom-sheet {
     padding: 20px;
     position: fixed;
-    bottom: 0;
-    height: 0;
+    bottom: -100%;
+
     left: 0;
     right: 0;
     background-color: black;
@@ -14,14 +14,10 @@ export const BottomSheet = styled.div`
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
     border-top-left-radius: 5%;
     border-top-right-radius: 5%;
-    transition: height 0.5s ease-in-out;
+    transition: bottom 0.5s ease-in-out;
 
     &.open {
-      height: auto;
-
-      &.expanded {
-        height: 90%;
-      }
+      bottom: 0;
     }
   }
 
