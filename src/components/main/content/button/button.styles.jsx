@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 
+const mediaBreak = "1125px";
+
 export const BtnContainer = styled.button`
   width: 100%;
 
@@ -14,14 +16,14 @@ export const BtnContainer = styled.button`
   color: rgb(255, 255, 255);
   background-color: rgb(0, 0, 0);
 
-  @media (max-width: 768px) {
+  @media (max-width: ${mediaBreak}) {
     background-color: rgb(0, 131, 255);
   }
 
   p {
     color: rgb(255, 255, 255);
 
-    @media (max-width: 768px) {
+    @media (max-width: ${mediaBreak}) {
       color: black;
     }
   }

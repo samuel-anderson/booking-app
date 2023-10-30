@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const CartStyles = styled.div`
-  position: fixed;
+  position: relative;
   box-sizing: border-box;
   width: 410px;
   min-height: 575px;
@@ -10,7 +10,10 @@ export const CartStyles = styled.div`
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 4px 16px 0px;
   background-color: rgb(255, 255, 255);
-  right: 40px;
+
+  @media (max-width: 1125px) {
+    display: none;
+  }
 
   .order-text {
     font-size: 20px;
@@ -44,10 +47,6 @@ export const CartStyles = styled.div`
 
   .with {
     color: rgba(60, 60, 67, 0.6);
-  }
-
-  @media (max-width: 768px) {
-    display: none;
   }
 `;
 

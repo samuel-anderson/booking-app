@@ -19,10 +19,10 @@ export const BottomSheet = styled.div`
     &.open {
       bottom: 0;
     }
-  }
 
-  @media (min-width: 768px) {
-    display: none;
+    @media (min-width: 1125px) {
+      display: none;
+    }
   }
 
   .order {

@@ -5,7 +5,7 @@ export const ProfessionalCardStyles = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 140px;
+  width: 166px;
   height: 230px;
   padding: 24px;
   border: 1px solid rgb(202, 202, 202);

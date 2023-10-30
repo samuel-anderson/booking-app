@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 
+const mediaBreak = "1125px";
+
 export const IconBtnStyles = styled.div`
   display: flex;
   justify-content: center;
@@ -25,7 +27,7 @@ export const ServiceCardStyles = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 140px;
+  width: 166px;
   min-height: 124px;
   cursor: pointer;
   padding: 20px 16px;
@@ -41,7 +43,7 @@ export const ServiceCardStyles = styled.div`
   &.isSelected {
     background-color: black;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${mediaBreak}) {
       background-color: rgb(0, 131, 255);
     }
   }
@@ -59,7 +61,7 @@ export const ServiceCardStyles = styled.div`
     &.isSelected {
       color: white;
 
-      @media (max-width: 768px) {
+      @media (max-width: ${mediaBreak}) {
         color: black;
       }
     }
@@ -79,7 +81,7 @@ export const ServiceCardStyles = styled.div`
     &.isSelected {
       color: white;
 
-      @media (max-width: 768px) {
+      @media (max-width: ${mediaBreak}) {
         color: black;
       }
     }
@@ -104,7 +106,7 @@ export const ServiceCardStyles = styled.div`
       color: white;
       background: rgb(53, 53, 53);
 
-      @media (max-width: 768px) {
+      @media (max-width: ${mediaBreak}) {
         color: black;
         background-color: rgba(255, 255, 255, 0.16);
       }
