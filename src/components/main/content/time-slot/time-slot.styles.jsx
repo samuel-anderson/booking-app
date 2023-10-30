@@ -11,6 +11,11 @@ export const TimeSlotStyles = styled.button`
   border: 1px solid rgb(202, 202, 202);
   font-weight: bold;
 
+  &.selected {
+    background-color: black;
+    color: white;
+  }
+
   &.notSelected:hover {
     border-color: rgb(230, 230, 230);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 16px 24px 0px;
@@ -22,8 +27,5 @@ export const TimeSlotStyles = styled.button`
   &.notSelected:focus {
     transform: translateY(1px);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 12px 0px;
-    background-color: rgb(0, 0, 0);
-    border-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
   }
 `;

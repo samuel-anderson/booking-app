@@ -3,14 +3,17 @@
 // import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
 import { useState } from "react";
-import { CalendarContainer, DateContainer } from "./calendar.styles";
+import { CalendarContainer, DateContainer, Date } from "./calendar.styles";
 import { useDispatch } from "react-redux";
-import { setServiceDate } from "../../../../features/cart/cartSlice";
+import {
+  setServiceDate,
+  setStartTime,
+} from "../../../../features/cart/cartSlice";
 
 const Calendar = () => {
   const dispatch = useDispatch();
-  const [currentMonth, setCurrentMonth] = useState(
-    moment().format("MMMM YYYY")
+  const [displayDate, setDisplayedDate] = useState(
+    moment().format("MMMM Do, YYYY")
   );
 
   const generateNext14Days = () => {
@@ -21,7 +24,7 @@ const Calendar = () => {
       dates.push({
         value: currentDate.format("YYYY-MM-DD"),
         date: currentDate.date(),
-        month: currentDate.format("MMMM YYYY"),
+        displayDate: currentDate.format("MMMM Do, YYYY"),
         day: currentDate.format("dd"),
       });
 
@@ -32,20 +35,20 @@ const Calendar = () => {
 
   return (
     <CalendarContainer>
-      <div>{currentMonth}</div>
+      <div>{displayDate}</div>
       <DateContainer>
         {generateNext14Days().map((item, idx) => {
           return (
             <div
               key={idx}
-              style={{ padding: 10 }}
               onClick={() => {
-                setCurrentMonth(item.month);
+                setDisplayedDate(item.displayDate);
                 dispatch(setServiceDate(item.value));
+                dispatch(setStartTime(null));
               }}
             >
-              <div>{item.date}</div>
-              <div>{item.day}</div>
+              <Date>{item.date}</Date>
+              <div style={{ textAlign: "center" }}>{item.day}</div>
             </div>
           );
         })}

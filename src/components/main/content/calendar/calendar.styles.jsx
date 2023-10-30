@@ -8,5 +8,21 @@ export const CalendarContainer = styled.div`
 
 export const DateContainer = styled.div`
   display: flex;
-  gap: 10;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 10px;
+`;
+
+export const Date = styled.div`
+  width: 25px;
+  background-color: gray;
+  display: flex;
+  border-radius: 25px;
+  padding: 2px;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+  }
 `;
