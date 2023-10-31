@@ -53,15 +53,6 @@ export const fetchCollection = async (collectionName) => {
   return items;
 };
 
-// export const addDocument = async (collectionName, data) => {
-//   try {
-//     const collectionRef = collection(db, collectionName);
-//     await addDoc(collectionRef, data);
-//   } catch (error) {
-//     console.error("Error creating document:", error);
-//   }
-// };
-
 export const addDocument = async (collectionKey, jsonObjectsToAdd) => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
@@ -125,7 +116,7 @@ export const sendSMS = async ({
         },
         body: JSON.stringify({
           to: professionalPhoneNumber,
-          body: `You have an appt with ${clientName} - ${date} from ${startTime}-${endTime}. ${service}. Client # - ${clientPhoneNumber}`,
+          body: `You have an appt with ${clientName} - ${date} from ${startTime}-${endTime}. ${service}. Client Phone Number - ${clientPhoneNumber}`,
         }),
       }
     )
@@ -133,6 +124,6 @@ export const sendSMS = async ({
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   } catch (error) {
-    console.error("Error creating document:", error);
+    console.error("Error sending SMS:", error);
   }
 };
