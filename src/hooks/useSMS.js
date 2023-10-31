@@ -54,7 +54,8 @@ const useSMS = () => {
           clientName: `${clientFirstName} ${clientLastName}`,
           professionalPhoneNumber: cart.professional.phoneNumber,
           date: cart.serviceDate,
-          time: cart.startTime,
+          startTime: cart.startTime,
+          endTime: cart.endTime,
           service: cart.service.title + showAddOns(),
           clientPhoneNumber: clientPhoneNumber,
         });

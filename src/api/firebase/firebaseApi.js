@@ -3,6 +3,7 @@ import {
   addDocument,
   deleteDocument,
   updateDocument,
+  fetchDocument,
 } from "../../utils/firebase";
 
 export const getCollection = async (collectionName) => {
@@ -10,6 +11,10 @@ export const getCollection = async (collectionName) => {
   return items;
 };
 
+export const getDocument = async (documentName) => {
+  const document = await fetchDocument(documentName);
+  return document;
+};
 export const createDocument = async (collectionName, document) => {
   await addDocument(collectionName, document);
 };

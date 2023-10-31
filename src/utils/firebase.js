@@ -19,6 +19,24 @@ import moment from "moment";
 initializeApp(firebaseConfig);
 const db = getFirestore();
 
+export const fetchDocument = async (documentName) => {
+  const collectionRef = collection(db, "barber_shop");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const items = querySnapshot.docs
+    .filter((docSnapshot) => {
+      return docSnapshot.id === "appointments";
+    })
+    .map((docSnapshot) => {
+      return {
+        id: docSnapshot.id,
+        data: docSnapshot.data(),
+      };
+    });
+  return items;
+};
+
 export const fetchCollection = async (collectionName) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
@@ -92,7 +110,8 @@ export const sendSMS = async ({
   clientName,
   professionalPhoneNumber,
   date,
-  time,
+  startTime,
+  endTime,
   service,
   clientPhoneNumber,
 }) => {
@@ -106,7 +125,7 @@ export const sendSMS = async ({
         },
         body: JSON.stringify({
           to: professionalPhoneNumber,
-          body: `You have an appt with ${clientName} - ${date} at ${time}. ${service}. Client # - ${clientPhoneNumber}`,
+          body: `You have an appt with ${clientName} - ${date} from ${startTime}-${endTime}. ${service}. Client # - ${clientPhoneNumber}`,
         }),
       }
     )
