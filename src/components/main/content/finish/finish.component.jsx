@@ -86,7 +86,10 @@ const Finish = () => {
   return (
     <div>
       <h3>Finish Booking</h3>
-      <form onSubmit={submitHandler} style={{ width: "100%" }}>
+      <form
+        onSubmit={submitHandler}
+        style={{ width: "100%", paddingRight: 20 }}
+      >
         <FormInput
           label="First Name"
           inputOptions={{

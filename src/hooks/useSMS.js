@@ -34,6 +34,7 @@ const useSMS = () => {
         addOns: cart.addOns,
         serviceDate: cart.serviceDate,
         startTime: cart.startTime,
+        endTime: cart.endTime,
         estimatedDuration: cart.estimatedDuration,
       }
     );

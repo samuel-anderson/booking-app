@@ -7,6 +7,7 @@ const CART_INITIAL_STATE = {
   addOns: [],
   serviceDate: moment().format("YYYY-MM-DD"),
   startTime: null,
+  endTime: null,
   estimatedDuration: null,
 };
 
@@ -47,6 +48,10 @@ const cartSlice = createSlice({
     },
     setStartTime: (state, action) => {
       state.startTime = action.payload;
+
+      state.endTime = moment(state.startTime, "h:mm A")
+        .add(state.estimatedDuration, "minutes")
+        .format("h:mm A");
     },
   },
 });
