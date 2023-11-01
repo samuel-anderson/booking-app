@@ -11,6 +11,6 @@ export const ContentStyles = styled.div`
 
   @media (max-width: ${mediaBreak}) {
     width: auto;
-    margin-left: -10px;
+    margin-left: -12px;
   }
 `;
