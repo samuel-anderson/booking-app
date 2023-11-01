@@ -107,7 +107,7 @@ export const sendSMS = async ({
   clientPhoneNumber,
 }) => {
   try {
-    fetch(
+    return fetch(
       "https://us-central1-crwn-clothing-db-b150d.cloudfunctions.net/sendSMS",
       {
         method: "POST",
@@ -121,7 +121,7 @@ export const sendSMS = async ({
       }
     )
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => data)
       .catch((error) => console.error(error));
   } catch (error) {
     console.error("Error sending SMS:", error);

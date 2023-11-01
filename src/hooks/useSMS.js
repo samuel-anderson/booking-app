@@ -50,7 +50,7 @@ const useSMS = () => {
     try {
       insertBooking(clientFirstName, clientLastName, clientPhoneNumber);
       if (cart.professional) {
-        sendSMS({
+        return sendSMS({
           clientName: `${clientFirstName} ${clientLastName}`,
           professionalPhoneNumber: cart.professional.phoneNumber,
           date: cart.serviceDate,

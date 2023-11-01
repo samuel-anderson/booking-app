@@ -10,6 +10,7 @@ import Calendar from "../../components/main/content/calendar/calendar.component"
 import { AvailabilityContainer } from "./availability.styles";
 import moment from "moment";
 import { DAYSOFWEEK } from "../../utils/date";
+import Header from "../../components/main/content/header/header.component";
 
 const Availability = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
@@ -50,6 +51,8 @@ const Availability = () => {
 
   return (
     <>
+      <Header text="Choose Date & Time" />
+
       <AvailabilityContainer>
         <Calendar clickHandler={checkProfessionalSchedule} />
         {schedule && (

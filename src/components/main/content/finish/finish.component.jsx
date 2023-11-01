@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getStep, STEPS } from "../stepper/stepper.component";
 import useNavigation from "../../../../hooks/useNavigation";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import useSMS from "../../../../hooks/useSMS";
+import { setIsCartFinished } from "../../../../features/cart/cartSlice";
 
 const defaultFormFields = {
   firstName: "",
@@ -13,6 +14,7 @@ const defaultFormFields = {
 };
 
 const Finish = () => {
+  const dispatch = useDispatch();
   const activeStep = useSelector((state) => state.step.activeStep);
   const { navigateAndUpdateStep } = useNavigation();
 
@@ -41,8 +43,14 @@ const Finish = () => {
     if (!validatePhoneNumber()) return;
 
     try {
-      submitBooking(firstName, lastName, phoneNumber);
-      resetFormFields();
+      const response = await submitBooking(firstName, lastName, phoneNumber);
+
+      if (response.success) {
+        resetFormFields();
+        dispatch(setIsCartFinished(response.success));
+      } else {
+        console.log(response);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -85,7 +93,6 @@ const Finish = () => {
   };
   return (
     <div>
-      <h3>Finish Booking</h3>
       <form
         onSubmit={submitHandler}
         style={{ width: "100%", paddingRight: 20 }}

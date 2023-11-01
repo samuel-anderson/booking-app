@@ -2,6 +2,7 @@ import ServiceList from "../../components/main/content/service-list/service-list
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setStep } from "../../features/step/stepSlice";
+import Header from "../../components/main/content/header/header.component";
 
 const Service = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
@@ -14,7 +15,7 @@ const Service = () => {
 
   return (
     <div style={{ position: "relative" }}>
-      Choose a service
+      <Header text="Choose Service" />
       <ServiceList />
     </div>
   );

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
 
 const CART_INITIAL_STATE = {
+  isFinished: false,
   professional: null,
   service: null,
   addOns: [],
@@ -16,6 +17,9 @@ const cartSlice = createSlice({
   initialState: CART_INITIAL_STATE,
   reducers: {
     emptyCart: (_) => CART_INITIAL_STATE,
+    setIsCartFinished: (state, action) => {
+      state.isFinished = action.payload;
+    },
     setProfessional: (state, action) => {
       state.professional = action.payload.professional;
     },
@@ -58,6 +62,7 @@ const cartSlice = createSlice({
 
 export const {
   emptyCart,
+  setIsCartFinished,
   setProfessional,
   addService,
   removeService,
