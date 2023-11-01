@@ -7,6 +7,7 @@ export const ContentStyles = styled.div`
   height: 100%;
   min-height: 615px;
   flex: 1 1 0%;
+  margin-bottom: 200px;
 
   @media (max-width: ${mediaBreak}) {
     width: auto;
