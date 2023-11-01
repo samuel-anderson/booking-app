@@ -11,6 +11,8 @@ export const ProfessionalCardStyles = styled.div`
   border: 1px solid rgb(202, 202, 202);
   border-radius: 16px;
   cursor: pointer;
+  font-size: 20px;
+  text-align: center;
 
   img {
     width: 35%;
