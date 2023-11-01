@@ -2,16 +2,13 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 
-import ProfessionalList from "../../components/main/content/professional-list/professional-list.component";
+import ProfessionalList from "./professional-list.component";
 
 import configureStore from "redux-mock-store";
 import { BrowserRouter } from "react-router-dom";
-import { setProfessional } from "../../features/cart/cartSlice";
-import { setStep } from "../../features/step/stepSlice";
-import {
-  STEPS,
-  getStep,
-} from "../../components/main/content/stepper/stepper.component";
+import { setProfessional } from "../../../../features/cart/cartSlice";
+import { setStep } from "../../../../features/step/stepSlice";
+import { STEPS, getStep } from "../stepper/stepper.component";
 
 const mockStore = configureStore([]);
 
