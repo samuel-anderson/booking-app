@@ -13,6 +13,7 @@ export const ProfessionalCardStyles = styled.div`
   cursor: pointer;
   font-size: 20px;
   text-align: center;
+  font-weight: bold;
 
   img {
     width: 35%;
