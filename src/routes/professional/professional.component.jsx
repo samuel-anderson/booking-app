@@ -2,8 +2,16 @@ import ProfessionalList from "../../components/main/content/professional-list/pr
 // import GenericCard from "../../components/main/content/generic-card/generic-card.component";
 import { Container } from "./professional.styles";
 import Header from "../../components/main/content/header/header.component";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { emptyCart } from "../../features/cart/cartSlice";
 
 const Professional = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(emptyCart());
+  });
   return (
     <div>
       <Header text="Choose Professional" />

@@ -13,6 +13,8 @@ const useNavigation = () => {
     navigate(route);
   }
 
+  //function for logic to discern when to kick to step or empty cart
+
   return { navigateAndUpdateStep };
 };
 

@@ -4,8 +4,9 @@ import { getStep, STEPS } from "../stepper/stepper.component";
 import useNavigation from "../../../../hooks/useNavigation";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import useSMS from "../../../../hooks/useSMS";
-import { setIsCartFinished } from "../../../../features/cart/cartSlice";
+import { sendSMSStart } from "../../../../features/sms/smsSlice";
+import CircularProgress from "@mui/material/CircularProgress";
+import { LoadingContainer } from "./finish.styles";
 
 const defaultFormFields = {
   firstName: "",
@@ -15,14 +16,15 @@ const defaultFormFields = {
 
 const Finish = () => {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const sms = useSelector((state) => state.sms);
+
   const activeStep = useSelector((state) => state.step.activeStep);
   const { navigateAndUpdateStep } = useNavigation();
 
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { firstName, lastName, phoneNumber } = formFields;
   const [phoneError, setPhoneError] = useState("");
-
-  const { submitBooking } = useSMS();
 
   useEffect(() => {
     const navigate = () => {
@@ -43,14 +45,20 @@ const Finish = () => {
     if (!validatePhoneNumber()) return;
 
     try {
-      const response = await submitBooking(firstName, lastName, phoneNumber);
+      //const response = await submitBooking(firstName, lastName, phoneNumber);
 
-      if (response.success) {
-        resetFormFields();
-        dispatch(setIsCartFinished(response.success));
-      } else {
-        console.log(response);
-      }
+      dispatch(
+        sendSMSStart({
+          cart: cart,
+          clientInfo: {
+            clientFirstName: firstName,
+            clientLastName: lastName,
+            clientPhoneNumber: phoneNumber,
+          },
+        })
+      );
+
+      resetFormFields();
     } catch (e) {
       console.log(e);
     }
@@ -131,7 +139,14 @@ const Finish = () => {
         />
 
         <div>{phoneError}</div>
-        <Button buttonOptions={{ type: "submit" }}>Finish Booking!</Button>
+        {!sms.loading && (
+          <Button buttonOptions={{ type: "submit" }}>Finish Booking!</Button>
+        )}
+        {sms.loading && (
+          <LoadingContainer>
+            <CircularProgress />
+          </LoadingContainer>
+        )}
       </form>
     </div>
   );
