@@ -14,6 +14,20 @@ const useNavigation = () => {
   }
 
   //function for logic to discern when to kick to step or empty cart
+  /*
+  0
+  1
+  2
+  3
+
+  idx & activeStep
+  emptyCart
+
+  isCartFinished -> Go to 1 and empty
+
+
+
+  */
 
   return { navigateAndUpdateStep };
 };
