@@ -1,17 +1,19 @@
 import ServiceList from "../../components/main/content/service-list/service-list.component";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { setStep } from "../../features/step/stepSlice";
 import Header from "../../components/main/content/header/header.component";
+import useNavigation from "../../hooks/useNavigation";
+import {
+  getStep,
+  STEPS,
+} from "../../components/main/content/stepper/stepper.component";
+import { useEffect } from "react";
 
 const Service = () => {
-  const activeStep = useSelector((state) => state.step.activeStep);
-
-  const dispatch = useDispatch();
+  const { step } = getStep(STEPS.service);
+  const { checkStep } = useNavigation();
 
   useEffect(() => {
-    if (activeStep !== 1) dispatch(setStep(1));
-  }, [dispatch, activeStep]);
+    checkStep(step);
+  }, [checkStep, step]);
 
   return (
     <div style={{ position: "relative" }}>

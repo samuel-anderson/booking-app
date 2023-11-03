@@ -1,11 +1,9 @@
 import { Stepper, Step, StepLabel } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-//import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { useSelector } from "react-redux";
 import { Label } from "./stepper.styles";
 import useNavigation from "../../../../hooks/useNavigation";
-import { emptyCart } from "../../../../features/cart/cartSlice";
 
-const steps = ["Professional", "Service", "Time", "Finish"];
+const steps = ["Professional", "Service", "Availability", "Finish"];
 
 export const STEPS = {
   professional: "professional",
@@ -29,12 +27,12 @@ const getActiveLabelClass = (idx, activeStep) => {
 
 const Steps = () => {
   const activeStep = useSelector((state) => state.step.activeStep);
+  const isCartFinished = useSelector((state) => state.cart.isFinished);
   const { navigateAndUpdateStep } = useNavigation();
-  const dispatch = useDispatch();
 
   const onClickHandler = (idx, label) => {
-    if (idx === 0) dispatch(emptyCart());
-    if (idx < activeStep) labelClickHandler(label.toLowerCase());
+    if (idx === 0 || isCartFinished) labelClickHandler(STEPS.professional);
+    else if (idx < activeStep) labelClickHandler(label.toLowerCase());
   };
 
   const labelClickHandler = (label) => {

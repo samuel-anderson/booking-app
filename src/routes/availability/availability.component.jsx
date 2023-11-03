@@ -13,18 +13,12 @@ import { DAYSOFWEEK } from "../../utils/date";
 import Header from "../../components/main/content/header/header.component";
 
 const Availability = () => {
-  const activeStep = useSelector((state) => state.step.activeStep);
-
-  const { navigateAndUpdateStep } = useNavigation();
+  const { step } = getStep(STEPS.availability);
+  const { checkStep } = useNavigation();
 
   useEffect(() => {
-    const navigate = () => {
-      const { route, step } = getStep(STEPS.professional);
-      navigateAndUpdateStep(route, step);
-    };
-
-    if (activeStep !== 2) navigate();
-  }, [navigateAndUpdateStep, activeStep]);
+    checkStep(step);
+  }, [checkStep, step]);
 
   const selectedDate = useSelector((state) => state.cart.serviceDate);
   const selectedProfessional = useSelector((state) => state.cart.professional);
