@@ -9,13 +9,12 @@ import { ContentStyles } from "./content.styles";
 const Content = () => {
   return (
     <ContentStyles>
+      <Step />
       <Routes>
-        <Route path="/" element={<Step />}>
-          <Route index element={<Professional />} />
-          <Route path="/services" element={<Service />} />
-          <Route path="/availability" element={<Availability />} />
-          <Route path="/finish" element={<Complete />} />
-        </Route>
+        <Route path="/" element={<Professional />} />
+        <Route path="services" element={<Service />} />
+        <Route path="availability" element={<Availability />} />
+        <Route path="finish" element={<Complete />} />
       </Routes>
     </ContentStyles>
   );

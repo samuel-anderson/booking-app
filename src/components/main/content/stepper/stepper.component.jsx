@@ -14,10 +14,10 @@ export const STEPS = {
 
 export const getStep = (step = STEPS.professional) => {
   return {
-    [STEPS.professional]: { step: 0, route: "/" },
-    [STEPS.service]: { step: 1, route: "/services" },
-    [STEPS.availability]: { step: 2, route: "/availability" },
-    [STEPS.finish]: { step: 3, route: "/finish" },
+    [STEPS.professional]: { step: 0, route: "" },
+    [STEPS.service]: { step: 1, route: "services" },
+    [STEPS.availability]: { step: 2, route: "availability" },
+    [STEPS.finish]: { step: 3, route: "finish" },
   }[step];
 };
 

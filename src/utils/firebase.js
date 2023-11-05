@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "../config/firebase";
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  getAuth,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 import {
   collection,
@@ -18,6 +24,8 @@ import moment from "moment";
 // Initialize Firebase
 initializeApp(firebaseConfig);
 const db = getFirestore();
+
+export const auth = getAuth(); //singleton, authentication memory base
 
 export const fetchDocument = async (documentName) => {
   const collectionRef = collection(db, "barber_shop");
@@ -126,4 +134,18 @@ export const sendSMS = async ({
   } catch (error) {
     console.error("Error sending SMS:", error);
   }
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => await signOut(auth);
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };

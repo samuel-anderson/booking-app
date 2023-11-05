@@ -1,14 +1,19 @@
+import { Routes, Route } from "react-router-dom";
+
 import { ContainerStyle } from "./container.styles";
 import Header from "../header/header.component";
 import Main from "../main/main.component";
-import Footer from "../footer/footer.component";
+
+import SignIn from "../../routes/signin/signin";
 
 const Container = () => {
   return (
     <ContainerStyle>
       <Header />
-      <Main />
-      <Footer />
+      <Routes>
+        <Route path="*" element={<Main />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </ContainerStyle>
   );
 };
