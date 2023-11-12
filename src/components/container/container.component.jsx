@@ -5,6 +5,7 @@ import Header from "../header/header.component";
 import Main from "../main/main.component";
 
 import SignIn from "../../routes/signin/signin";
+import UserDashboard from "../user-dashboard/user-dashboard.component";
 
 const Container = () => {
   return (
@@ -13,6 +14,7 @@ const Container = () => {
       <Routes>
         <Route path="*" element={<Main />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/dashboard" element={<UserDashboard />} />
       </Routes>
     </ContainerStyle>
   );

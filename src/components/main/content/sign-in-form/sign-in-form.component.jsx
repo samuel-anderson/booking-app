@@ -2,7 +2,9 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { selectBarberEmails } from "../../../../features/professionals/professionalsSelector";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { signUpStart } from "../../../../features/user/userSlice";
 
 const defaultFormFields = {
   email: "",
@@ -10,6 +12,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -25,9 +28,44 @@ const SignInForm = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    if (!email || !password) return;
+    else {
+      dispatch(signUpStart({ email, password }));
+      finishAuth();
+    }
+  };
+
+  const finishAuth = () => {
     resetFormFields();
     setValidEmail(false);
   };
+
+  //   const handleLogin = async () => {
+  //     try {
+  //       await signInAuthUserWithEmailAndPassword(email, password);
+  //       console.log("User logged in successfully!");
+  //     } catch (error) {
+  //       console.error("Error logging in:", error.message);
+  //     }
+  //   };
+
+  //   const handleSignUp = async () => {
+  //     dispatch(signUpStart({ email, password }));
+  //     finishAuth();
+  //     // try {
+  //     //   await createAuthUserWithEmailAndPassword(email, password);
+  //     //   console.log("User signed up successfully!");
+  //     //   handleLogin();
+  //     //   handleEnd();
+  //     // } catch (error) {
+  //     //   // If the user already exists, attempt to log them in
+  //     //   if (error.code === "auth/email-already-in-use") {
+  //     //     handleLogin();
+  //     //   } else {
+  //     //     console.error("Error signing up:", error.message);
+  //     //   }
+  //     // }
+  //   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;

@@ -1,11 +1,34 @@
 import { HeaderContainer, NavLink } from "./header.styles";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signOutStart } from "../../features/user/userSlice";
+import { useEffect } from "react";
 const Header = () => {
+  const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+
+  const signOutHandler = () => {
+    dispatch(signOutStart());
+  };
+
+  useEffect(() => {
+    if (currentUser) navigate("/dashboard");
+  }, [navigate, currentUser]);
+
   return (
     <>
       <HeaderContainer>
         <NavLink to="/">BOOK APPOINTMENT</NavLink>
-        <NavLink to="/signin">BARBER SIGN IN</NavLink>
+
+        {currentUser ? (
+          <NavLink as="span" onClick={signOutHandler}>
+            BARBER SIGN OUT
+          </NavLink>
+        ) : (
+          <NavLink to="/signin">BARBER SIGN IN</NavLink>
+        )}
       </HeaderContainer>
     </>
   );

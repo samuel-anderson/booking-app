@@ -1,6 +1,7 @@
 import { GlobalStyle } from "./styles/globalStyles";
 import Container from "./components/container/container.component";
 import { fetchShopDataStart } from "./features/shop/shopSlice";
+import { checkUserSession } from "./features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import useFirebase from "./hooks/useFirebase";
@@ -11,6 +12,7 @@ function App() {
   useFirebase();
 
   useEffect(() => {
+    dispatch(checkUserSession());
     dispatch(fetchShopDataStart());
   }, [dispatch]);
 

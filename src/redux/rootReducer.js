@@ -6,6 +6,7 @@ import professionalReducer from "../features/professionals/professionalsSlice";
 import serviceReducer from "../features/services/servicesSlice";
 import appointementReducer from "../features/appointments/appointmentsSlice";
 import smsReducer from "../features/sms/smsSlice";
+import userReducer from "../features/user/userSlice";
 
 const rootReducer = combineReducers({
   step: stepReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   services: serviceReducer,
   appointments: appointementReducer,
   sms: smsReducer,
+  user: userReducer,
 });
 
 export default rootReducer;

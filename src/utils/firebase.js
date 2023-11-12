@@ -6,6 +6,7 @@ import {
   signOut,
   getAuth,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import {
@@ -15,7 +16,9 @@ import {
   updateDoc,
   deleteDoc,
   arrayUnion,
+  setDoc,
   doc,
+  getDoc,
   writeBatch,
 } from "firebase/firestore";
 
@@ -148,4 +151,43 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+//get data from authentication service and store data
+export const createUserDocumentFromAuth = async (userAuth) => {
+  if (!userAuth) return;
+
+  //does user document reference exist
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+
+  if (!userSnapshot.exists()) {
+    const { email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, {
+        email,
+        createdAt,
+      });
+    } catch (error) {
+      console.log("error creating the user", error);
+    }
+  }
+
+  //return userDocRef;
+  return userSnapshot;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };

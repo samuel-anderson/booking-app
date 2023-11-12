@@ -3,7 +3,6 @@ import SignInForm from "../../components/main/content/sign-in-form/sign-in-form.
 const SignIn = () => {
   return (
     <>
-      SIGN IN
       <SignInForm />
     </>
   );
