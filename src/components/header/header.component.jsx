@@ -24,10 +24,10 @@ const Header = () => {
 
         {currentUser ? (
           <NavLink as="span" onClick={signOutHandler}>
-            BARBER SIGN OUT
+            SIGN OUT
           </NavLink>
         ) : (
-          <NavLink to="/signin">BARBER SIGN IN</NavLink>
+          <NavLink to="/signin">SIGN IN</NavLink>
         )}
       </HeaderContainer>
     </>
