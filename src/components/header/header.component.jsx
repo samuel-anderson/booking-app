@@ -1,8 +1,7 @@
 import { HeaderContainer, NavLink } from "./header.styles";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { signOutStart } from "../../features/user/userSlice";
-import { useEffect } from "react";
+
 const Header = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();

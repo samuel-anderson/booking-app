@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { selectBarberEmails } from "../../../../features/professionals/professionalsSelector";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { signUpStart } from "../../../../features/user/userSlice";
 
@@ -13,6 +14,9 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -20,6 +24,10 @@ const SignInForm = () => {
   const [error, setError] = useState(null);
   const barberEmails = useSelector(selectBarberEmails);
   //const professionals = useSelector((state) => state.professionals.barbers);
+
+  useEffect(() => {
+    if (currentUser) navigate("/dashboard");
+  }, [navigate, currentUser]);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -39,33 +47,6 @@ const SignInForm = () => {
     resetFormFields();
     setValidEmail(false);
   };
-
-  //   const handleLogin = async () => {
-  //     try {
-  //       await signInAuthUserWithEmailAndPassword(email, password);
-  //       console.log("User logged in successfully!");
-  //     } catch (error) {
-  //       console.error("Error logging in:", error.message);
-  //     }
-  //   };
-
-  //   const handleSignUp = async () => {
-  //     dispatch(signUpStart({ email, password }));
-  //     finishAuth();
-  //     // try {
-  //     //   await createAuthUserWithEmailAndPassword(email, password);
-  //     //   console.log("User signed up successfully!");
-  //     //   handleLogin();
-  //     //   handleEnd();
-  //     // } catch (error) {
-  //     //   // If the user already exists, attempt to log them in
-  //     //   if (error.code === "auth/email-already-in-use") {
-  //     //     handleLogin();
-  //     //   } else {
-  //     //     console.error("Error signing up:", error.message);
-  //     //   }
-  //     // }
-  //   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
