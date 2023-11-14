@@ -12,6 +12,7 @@ export const HeaderContainer = styled.header`
 
   @media (max-width: ${mediaBreak}) {
     justify-content: center;
+    flex-direction: column;
   }
 `;
 
