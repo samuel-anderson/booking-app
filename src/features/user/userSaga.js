@@ -21,8 +21,8 @@ import {
 } from "./userSlice";
 
 const ERRORS = {
-  "auth/email-already-in-use":
-    "Email already has a registered account! Try logging in!",
+  "auth/email-already-in-use": "*Email already has a registered account*",
+  "auth/weak-password": "*Password should be at least 6 characters*",
 };
 
 export function* getSnapshotFromUserAuth(userAuth) {

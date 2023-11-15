@@ -14,6 +14,7 @@ const userSlice = createSlice({
     signUpStart(state) {
       state.loading = true;
       state.error = null;
+      console.log("Sign Up Start");
     },
     signUpSuccess(state) {
       state.loading = false;
@@ -21,6 +22,7 @@ const userSlice = createSlice({
     },
     signUpFailed(state, action) {
       state.error = action.payload;
+      state.loading = false;
     },
     signInStart(state) {
       state.loading = true;
@@ -33,6 +35,7 @@ const userSlice = createSlice({
     },
     signInFailed(state, action) {
       state.error = action.payload;
+      state.loading = false;
     },
     signOutStart(state) {
       state.loading = true;
@@ -45,6 +48,7 @@ const userSlice = createSlice({
     },
     signOutFailed(state, action) {
       state.error = action.payload;
+      state.loading = false;
     },
   },
 });

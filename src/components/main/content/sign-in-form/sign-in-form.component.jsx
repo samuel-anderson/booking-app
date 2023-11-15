@@ -4,6 +4,7 @@ import Button from "../button/button.component";
 import { selectBarberEmails } from "../../../../features/professionals/professionalsSelector";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { signInStart, signUpStart } from "../../../../features/user/userSlice";
 
@@ -15,7 +16,7 @@ const defaultFormFields = {
 const SignInForm = ({ action, goBack }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //   const userError = useSelector((state) => state.user.error);
+  const userSlice = useSelector((state) => state.user);
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -98,8 +99,14 @@ const SignInForm = ({ action, goBack }) => {
           />
         )}
 
-        <p style={{ fontSize: 14, color: "red" }}>{error}</p>
-        {/* <p style={{ fontSize: 14, color: "red" }}>{userError}</p> */}
+        {userSlice.loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <p style={{ fontSize: 14, color: "red" }}>{error}</p>
+            <p style={{ fontSize: 14, color: "red" }}>{userSlice.error}</p>
+          </>
+        )}
 
         {validEmail && (
           <Button
