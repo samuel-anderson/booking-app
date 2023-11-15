@@ -5,16 +5,17 @@ import { selectBarberEmails } from "../../../../features/professionals/professio
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { signUpStart } from "../../../../features/user/userSlice";
+import { signInStart, signUpStart } from "../../../../features/user/userSlice";
 
 const defaultFormFields = {
   email: "",
   password: "",
 };
 
-const SignInForm = () => {
+const SignInForm = ({ action, goBack }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  //   const userError = useSelector((state) => state.user.error);
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -38,7 +39,9 @@ const SignInForm = () => {
 
     if (!email || !password) return;
     else {
-      dispatch(signUpStart({ email, password }));
+      if (action === "register") dispatch(signUpStart({ email, password }));
+      else dispatch(signInStart({ email, password }));
+
       finishAuth();
     }
   };
@@ -61,7 +64,7 @@ const SignInForm = () => {
     if (barberEmails.includes(email)) {
       setValidEmail(true);
       setError(null);
-    } else setError("*Email NOT found*");
+    } else setError("*Barber email NOT found*");
   };
   return (
     <>
@@ -81,7 +84,6 @@ const SignInForm = () => {
             }}
           />
         )}
-        <p style={{ fontSize: 14, color: "red" }}>{error}</p>
 
         {validEmail && (
           <FormInput
@@ -96,13 +98,26 @@ const SignInForm = () => {
           />
         )}
 
-        {validEmail && (
-          <Button buttonOptions={{ type: "submit" }}>LOG IN</Button>
-        )}
+        <p style={{ fontSize: 14, color: "red" }}>{error}</p>
+        {/* <p style={{ fontSize: 14, color: "red" }}>{userError}</p> */}
 
-        {!validEmail && (
-          <Button buttonOptions={{ onClick: nextClick }}>NEXT</Button>
+        {validEmail && (
+          <Button
+            buttonOptions={{ type: "submit", style: { marginBottom: 10 } }}
+          >
+            {action === "login" ? "LOG IN" : "REGISTER"}
+          </Button>
         )}
+        {!validEmail && (
+          <Button
+            buttonOptions={{ onClick: nextClick, style: { marginBottom: 10 } }}
+          >
+            NEXT
+          </Button>
+        )}
+        <Button buttonOptions={{ onClick: goBack }}>
+          BACK TO SIGN IN PAGE
+        </Button>
       </form>
     </>
   );

@@ -10,6 +10,7 @@ import {
 import {
   checkUserSession,
   signInFailed,
+  signInStart,
   signInSuccess,
   signOutFailed,
   signOutStart,
@@ -18,6 +19,11 @@ import {
   signUpStart,
   signUpSuccess,
 } from "./userSlice";
+
+const ERRORS = {
+  "auth/email-already-in-use":
+    "Email already has a registered account! Try logging in!",
+};
 
 export function* getSnapshotFromUserAuth(userAuth) {
   try {
@@ -28,7 +34,7 @@ export function* getSnapshotFromUserAuth(userAuth) {
 
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
-    yield put(signInFailed(error));
+    yield put(signInFailed(error.code));
   }
 }
 
@@ -40,7 +46,7 @@ export function* isUserAuthenticated() {
 
     yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
-    yield put(signInFailed(error));
+    yield put(signInFailed(error.code));
   }
 }
 
@@ -58,7 +64,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
   } catch (error) {
     console.log("Sign In Failed: ", error);
 
-    yield put(signInFailed(error));
+    yield put(signInFailed(error.code));
   }
 }
 
@@ -73,15 +79,11 @@ export function* signUp({ payload: { email, password } }) {
     console.log("Sign Up Success: ", user);
     yield put(signUpSuccess(user));
   } catch (error) {
-    if (error.code === "auth/email-already-in-use") {
-      console.log("Sign In Start: ", { payload: { email, password } });
+    console.error("Sign Up Failed: ", error);
 
-      yield call(signInWithEmail, { payload: { email, password } });
-    }
-
-    console.log("Sign Up Failed: ", error);
-
-    yield put(signUpFailed(error));
+    yield put(
+      signUpFailed(ERRORS[error.code] ? ERRORS[error.code] : error.code)
+    );
   }
 }
 
@@ -93,7 +95,7 @@ export function* signOut() {
   } catch (error) {
     console.log("Sign Out Failed");
 
-    yield put(signOutFailed(error));
+    yield put(signOutFailed(error.code));
   }
 }
 
@@ -108,6 +110,9 @@ export function* onCheckUserSession() {
 export function* onSignUpStart() {
   yield takeLatest(signUpStart.type, signUp);
 }
+export function* onSignInStart() {
+  yield takeLatest(signInStart.type, signInWithEmail);
+}
 
 export function* onSignUpSuccess() {
   yield takeLatest(signUpSuccess.type, signInAfterSignUp);
@@ -121,6 +126,7 @@ export function* watchUserSagas() {
   yield all([
     call(onCheckUserSession),
     call(onSignUpStart),
+    call(onSignInStart),
     call(onSignUpSuccess),
     call(onSignOutStart),
   ]);
