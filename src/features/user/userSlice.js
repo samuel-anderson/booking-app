@@ -14,7 +14,6 @@ const userSlice = createSlice({
     signUpStart(state) {
       state.loading = true;
       state.error = null;
-      console.log("Sign Up Start");
     },
     signUpSuccess(state) {
       state.loading = false;

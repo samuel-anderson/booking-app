@@ -38,12 +38,16 @@ const SignInForm = ({ action, goBack }) => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    if (!email || !password) return;
-    else {
-      if (action === "register") dispatch(signUpStart({ email, password }));
-      else dispatch(signInStart({ email, password }));
+    try {
+      if (!email || !password) return;
+      else {
+        if (action === "register") dispatch(signUpStart({ email, password }));
+        else dispatch(signInStart({ email, password }));
 
-      finishAuth();
+        finishAuth();
+      }
+    } catch (e) {
+      console.log("ERROR: ", e);
     }
   };
 
