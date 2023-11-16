@@ -126,9 +126,7 @@ const SignInForm = ({ action, goBack }) => {
             NEXT
           </Button>
         )}
-        <Button buttonOptions={{ onClick: goBack }}>
-          BACK TO SIGN IN PAGE
-        </Button>
+        <Button buttonOptions={{ onClick: goBack }}>BACK TO ACCESS PAGE</Button>
       </form>
     </>
   );

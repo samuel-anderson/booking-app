@@ -24,11 +24,11 @@ const SignIn = () => {
               style: { marginBottom: 10 },
             }}
           >
-            BARBER LOG IN
+            LOG IN
           </Button>
 
           <Button buttonOptions={{ onClick: () => clickHandler("register") }}>
-            BARBER REGISTER
+            REGISTER
           </Button>
         </>
       )}
