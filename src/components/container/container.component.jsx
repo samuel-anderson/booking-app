@@ -14,7 +14,7 @@ const Container = () => {
       <Routes>
         <Route path="*" element={<Main />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="/dashboard/*" element={<UserDashboard />} />
       </Routes>
     </ContainerStyle>
   );
