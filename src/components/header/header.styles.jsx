@@ -26,3 +26,15 @@ export const NavLink = styled(Link)`
     text-decoration: underline;
   }
 `;
+
+export const DropDown = styled.div`
+  position: relative;
+`;
+
+export const DropDownMenu = styled.div`
+  position: absolute;
+  z-index: 100;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+`;
