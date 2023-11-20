@@ -35,6 +35,8 @@ export const DropDownMenu = styled.div`
   position: absolute;
   z-index: 100;
   width: 200px;
-  display: flex;
+  display: ${({ $isDropdownOpen }) => ($isDropdownOpen ? "flex" : "none")};
+
   flex-direction: column;
+  font-size: 10px;
 `;
