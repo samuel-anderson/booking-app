@@ -30,16 +30,7 @@ const Header = () => {
         {currentUser ? (
           <>
             <NavLink to="/dashboard">DASHBOARD</NavLink>
-            {/* <DropDown>
-              <NavLink as="span" onClick={toggleDropdown}>
-                DASHBOARD
-              </NavLink>
 
-              <DropDownMenu $isDropdownOpen={isDropdownOpen}>
-                <NavLink to="/dashboard">Service 1</NavLink>
-                <NavLink to="/dashboard">Service 2</NavLink>
-              </DropDownMenu>
-            </DropDown> */}
             <NavLink as="span" onClick={signOutHandler}>
               SIGN OUT
             </NavLink>
