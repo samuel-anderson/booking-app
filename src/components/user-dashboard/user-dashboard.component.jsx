@@ -42,8 +42,8 @@ const UserDashboard = () => {
     <>
       <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
         <Tabs value={value} onChange={handleChange} centered>
-          {DASHBOARD_TABS.map((tab) => {
-            return <Tab label={tab} />;
+          {DASHBOARD_TABS.map((tab, idx) => {
+            return <Tab label={tab} key={idx} />;
           })}
         </Tabs>
       </Box>

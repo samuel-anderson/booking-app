@@ -158,8 +158,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   if (!userAuth) return;
 
   //does user document reference exist
-  const userDocRef = doc(db, "users", userAuth.uid);
-  const userSnapshot = await getDoc(userDocRef);
+  const userDocRef = doc(db, "barbershop_users", userAuth.uid);
+  let userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
     const { email } = userAuth;
@@ -170,6 +170,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         email,
         createdAt,
       });
+
+      userSnapshot = await getDoc(userDocRef);
     } catch (error) {
       console.log("error creating the user", error);
     }
